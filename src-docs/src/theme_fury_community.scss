@@ -1,0 +1,11 @@
+// sass-lint:disable no-url-domains, no-url-protocols
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet');
+
+@import '../../src/theme_fury_community';
+@import './components/guide_components';
+@import './services/playground/index';
+@import './views/suggest/global_filter_group';
+
+// Elastic charts
+@import '~@elastic/charts/dist/theme';
+@import '../../src/themes/charts/theme';
