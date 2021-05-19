@@ -17,17 +17,22 @@
  * under the License.
  */
 
-import React, { FunctionComponent, HTMLAttributes } from 'react';
+import React, { PropsWithChildren, HTMLAttributes, forwardRef } from 'react';
 import { CommonProps } from '../common';
 
 import { EuiCodeBlockImpl, EuiCodeBlockImplProps } from './_code_block';
+
+export type EuiCodeBlockRef = HTMLPreElement;
 
 export type EuiCodeBlockProps = CommonProps &
   Omit<EuiCodeBlockImplProps, 'inline'> &
   HTMLAttributes<HTMLElement>;
 
-export const EuiCodeBlock: FunctionComponent<EuiCodeBlockProps> = ({
-  ...rest
-}) => {
-  return <EuiCodeBlockImpl inline={false} {...rest} />;
-};
+export const EuiCodeBlock = forwardRef<
+  EuiCodeBlockRef,
+  PropsWithChildren<EuiCodeBlockProps>
+>(({ ...rest }, ref) => {
+  return <EuiCodeBlockImpl inline={false} {...rest} ref={ref} />;
+});
+
+EuiCodeBlock.displayName = 'EuiCodeBlock';
