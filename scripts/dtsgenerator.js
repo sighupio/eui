@@ -25,7 +25,7 @@ function hasParentIndex(pathToFile) {
 }
 
 const generator = dtsGenerator({
-  prefix: '@elastic/eui',
+  prefix: 'fury-design-system',
   project: baseDir,
   out: 'eui.d.ts',
   exclude: [
@@ -44,14 +44,14 @@ const generator = dtsGenerator({
       path.basename(params.currentModuleId) === 'index' &&
       !hasParentIndex(path.resolve(baseDir, params.currentModuleId))
     ) {
-      // this module is exporting from an `index(.d)?.ts` file, declare its exports straight to @elastic/eui module
-      return '@elastic/eui';
+      // this module is exporting from an `index(.d)?.ts` file, declare its exports straight to fury-design-system module
+      return 'fury-design-system';
     } else {
-      // otherwise export as the module's path relative to the @elastic/eui namespace
+      // otherwise export as the module's path relative to the fury-design-system namespace
       if (params.currentModuleId.endsWith('/index')) {
-        return path.join('@elastic/eui', path.dirname(params.currentModuleId));
+        return path.join('fury-design-system', path.dirname(params.currentModuleId));
       } else {
-        return path.join('@elastic/eui', params.currentModuleId);
+        return path.join('fury-design-system', params.currentModuleId);
       }
     }
   },
@@ -66,7 +66,7 @@ const generator = dtsGenerator({
 
     if (isRelativeImport) {
       // if importing from an `index` file (directly or targeting a directory with an index),
-      // then if there is no parent index file this should import from @elastic/eui
+      // then if there is no parent index file this should import from fury-design-system
       const importPathTarget = resolve.sync(params.importedModuleId, {
         basedir: importFromBaseDir,
         extensions: ['.ts', '.tsx', '.d.ts'],
@@ -76,12 +76,12 @@ const generator = dtsGenerator({
       const isModuleIndex = isIndexFile && !hasParentIndex(importPathTarget);
 
       if (isModuleIndex) {
-        // importing an `index` file, in `resolveModuleId` above we change those modules to '@elastic/eui'
-        return '@elastic/eui';
+        // importing an `index` file, in `resolveModuleId` above we change those modules to 'fury-design-system'
+        return 'fury-design-system';
       } else {
-        // importing from a non-index TS source file, keep the import path but re-scope it to '@elastic/eui' namespace
+        // importing from a non-index TS source file, keep the import path but re-scope it to 'fury-design-system' namespace
         return path.join(
-          '@elastic/eui',
+          'fury-design-system',
           path.dirname(params.currentModuleId),
           params.importedModuleId
         );
@@ -94,8 +94,8 @@ const generator = dtsGenerator({
 
 // NOTE: once EUI is all converted to typescript this madness can be deleted forever
 // 1. strip any `/// <reference` lines from the generated eui.d.ts
-// 2. replace any import("src/...") declarations to import("@elastic/eui/src/...")
-// 3. replace any import("./...") declarations to import("@elastic/eui/src/...)
+// 2. replace any import("src/...") declarations to import("fury-design-system/src/...")
+// 3. replace any import("./...") declarations to import("fury-design-system/src/...)
 generator.then(() => {
   const defsFilePath = path.resolve(baseDir, 'eui.d.ts');
 
@@ -105,7 +105,7 @@ generator.then(() => {
       .readFileSync(defsFilePath)
       .toString()
       .replace(/\/\/\/\W+<reference.*/g, '') // 1.
-      .replace(/import\("src\/(.*?)"\)/g, 'import("@elastic/eui/src/$1")') // 2.
+      .replace(/import\("src\/(.*?)"\)/g, 'import("fury-design-system/src/$1")') // 2.
       .replace(
         // start 3.
         // find any singular `declare module { ... }` block
@@ -124,8 +124,8 @@ generator.then(() => {
             (importStatement, importPath) => {
               let target = path.join(path.dirname(moduleName), importPath);
 
-              // if the target resolves to an orphaned index.ts file, remap to '@elastic/eui'
-              const filePath = target.replace('@elastic/eui', baseDir);
+              // if the target resolves to an orphaned index.ts file, remap to 'fury-design-system'
+              const filePath = target.replace('fury-design-system', baseDir);
               const filePathTs = `${filePath}.ts`;
               const filePathTsx = `${filePath}.tsx`;
               const filePathResolvedToIndex = path.join(filePath, 'index.ts');
@@ -136,7 +136,7 @@ generator.then(() => {
                 fs.existsSync(filePathResolvedToIndex) && // and it resolves to an index.ts
                 hasParentIndex(filePathResolvedToIndex) === false // does not get exported at a higher level
               ) {
-                target = '@elastic/eui';
+                target = 'fury-design-system';
               }
 
               return `import ("${target}")`;
