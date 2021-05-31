@@ -1,7 +1,7 @@
 {
   "name": "fury-design-system",
   "description": "Components library for FURY, forked from @elastic/eui",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "license": "Apache-2.0",
   "main": "lib",
   "module": "es",
