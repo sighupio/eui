@@ -17,9 +17,9 @@
  * under the License.
  */
 
-declare module '@elastic/eui' {
+declare module 'fury-design-system' {
   // @ts-ignore path only exists at build time
-  export * from '@elastic/eui/src/components/common'; // eslint-disable-line import/no-unresolved
+  export * from 'fury-design-system/src/components/common'; // eslint-disable-line import/no-unresolved
   // @ts-ignore path only exists at build time
-  export * from '@elastic/eui/src/components/date_picker/react-datepicker'; // eslint-disable-line import/no-unresolved
+  export * from 'fury-design-system/src/components/date_picker/react-datepicker'; // eslint-disable-line import/no-unresolved
 }
