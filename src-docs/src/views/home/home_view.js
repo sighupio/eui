@@ -58,9 +58,9 @@ export const HomeView = () => (
               </p>
               <EuiFlexGroup gutterSize="xl" wrap responsive={false}>
                 <EuiFlexItem grow={false}>
-                  <EuiLink href="https://github.com/elastic/eui/blob/master/wiki/consuming.md">
+                  <Link to="/guidelines/getting-started">
                     <strong>Getting started</strong>
-                  </EuiLink>
+                  </Link>
                 </EuiFlexItem>
                 <EuiFlexItem grow={false}>
                   <Link to="/package/changelog">
@@ -216,9 +216,13 @@ export const HomeView = () => (
       <div>
         <EuiText size="xs" textAlign="center" color="subdued">
           <p>
-            EUI is licensed under{' '}
-            <EuiLink href="https://github.com/elastic/eui/blob/master/LICENSE">
-              Apache License 2.0
+            EUI is dual-licensed under{' '}
+            <EuiLink href="https://github.com/elastic/eui/blob/master/licenses/ELASTIC-LICENSE-2.0.md">
+              Elastic License 2.0
+            </EuiLink>{' '}
+            and{' '}
+            <EuiLink href="https://github.com/elastic/eui/blob/master/licenses/SSPL-LICENSE.md">
+              Server Side Public License, v 1
             </EuiLink>{' '}
             | Crafted with{' '}
             <span
