@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import { Connection } from '../../../../src/components';
 
@@ -8,5 +8,5 @@ export default () => {
       <Connection isConnected={false} />
       <Connection isConnected={true} />
     </>
-  )
-}
+  );
+};

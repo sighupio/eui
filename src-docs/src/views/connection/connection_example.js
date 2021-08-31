@@ -29,13 +29,14 @@ export const ConnectionExample = {
       ],
       text: (
         <p>
-          The <strong>Connection</strong> component is a visual utility for showing the state of a connection.
+          The <strong>Connection</strong> component is a visual utility for
+          showing the state of a connection.
         </p>
       ),
       components: { Connection },
       demo: <Connection isConnected={false} />,
       props: { ConnectionProps },
-      snippet: `<Connection isConnected={false} />`,
+      snippet: '<Connection isConnected={false} />',
     },
   ],
   playground: connectionConfig,
