@@ -66,6 +66,8 @@ import { ComboBoxExample } from './views/combo_box/combo_box_example';
 
 import { CommentListExample } from './views/comment/comment_example';
 
+import { ConnectionExample } from './views/connection/connection_example';
+
 import { ContextMenuExample } from './views/context_menu/context_menu_example';
 
 import { ControlBarExample } from './views/control_bar/control_bar_example';
@@ -399,6 +401,7 @@ const navigation = [
       CallOutExample,
       CardExample,
       CommentListExample,
+      ConnectionExample,
       DescriptionListExample,
       DragAndDropExample,
       EmptyPromptExample,

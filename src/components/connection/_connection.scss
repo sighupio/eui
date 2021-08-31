@@ -1,0 +1,34 @@
+.connection {
+  color: violet;
+  & svg path {
+    fill: none;
+    stroke: grey;
+    stroke-width: 2px;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-miterlimit: 0;
+    stroke-dasharray: 1px 10px;
+    transition: d 0.2s;
+  }
+}
+
+:root {
+  --connection-path-lenght: 0;
+}
+
+@keyframes connection {
+  0% {
+    stroke-dashoffset: 0;
+    // TODO: use theme colors
+    stroke: grey;
+  }
+  50% {
+    stroke-dashoffset: var(--connection-path-lenght);
+    stroke-width: 4px;
+  }
+  100% {
+    stroke-dashoffset: 0;
+    // TODO: use theme colors
+    stroke: rgb(80, 31, 172);
+  }
+}
