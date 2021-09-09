@@ -9,7 +9,6 @@ export const connectionConfig = () => {
     : FuryConnection.__docgenInfo;
   const propsToUse = propUtilityForPlayground(docgenInfo.props);
 
-  console.log('props js', propsToUse)
   propsToUse.isConnected = {
     ...propsToUse.isConnected,
     required: true,

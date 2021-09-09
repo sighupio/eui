@@ -51,13 +51,13 @@ export const FuryConnection: FunctionComponent<ConnectionProps> = ({
 
           // Set distance to move the bezier curves control point
           setControlPoint(randomNumberWithinARange(2, 26));
-          
         }, 500)
-        
       );
       // Hide the disconnected lines with the proper animations
-      linesRef.current?.style.setProperty('animation', 'close 0.5s ease-in-out, hide 0.5s 0.5s ease-in');
-
+      linesRef.current?.style.setProperty(
+        'animation',
+        'close 0.5s ease-in-out, hide 0.5s 0.5s ease-in'
+      );
     } else {
       // Reset loop and animations
       clearInterval(loop);
@@ -70,24 +70,20 @@ export const FuryConnection: FunctionComponent<ConnectionProps> = ({
       pathRef2.current?.style.setProperty('animation', 'none');
 
       linesRef.current?.style.setProperty('animation', 'show 1s ease-in');
-
     }
   }, [isConnected]); // eslint-disable-line
 
   useEffect(() => {
     // Set the disconnected lines visible at page load
     linesRef.current?.style.setProperty('opacity', '1');
-  }
-  ,[]);
+  }, []);
 
   return (
     <>
       <div {...rest} className="connection">
         {/* TODO: give container proportion to be scaled within the parent width */}
-        <svg xmlns="http://www.w3.org/2000/svg" >
-          <path
-            d={`M 0 20 Q 52.5 ${controlPoint}, 95 20 T 180 20`}
-          />
+        <svg xmlns="http://www.w3.org/2000/svg">
+          <path d={`M 0 20 Q 52.5 ${controlPoint}, 95 20 T 180 20`} />
           <path
             ref={pathRef}
             className="central-path"
@@ -98,13 +94,8 @@ export const FuryConnection: FunctionComponent<ConnectionProps> = ({
             className="central-path"
             d={`M 0 32 Q 52.5 ${controlPoint + 12}, 95 32 T 180 32`}
           />
-          <path
-            d={`M 0 38 Q 52.5 ${controlPoint + 18}, 95 38 T 180 38`}
-          />
-          <g
-            ref={linesRef}
-            className="lines"
-          >
+          <path d={`M 0 38 Q 52.5 ${controlPoint + 18}, 95 38 T 180 38`} />
+          <g ref={linesRef} className="lines">
             <line x1="33%" y1="14" x2="29%" y2="44" className="bigLine" />
             <line x1="30%" y1="14" x2="25%" y2="44" className="line" />
             <line x1="37%" y1="14" x2="32%" y2="44" className="line" />
