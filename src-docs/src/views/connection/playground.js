@@ -1,20 +1,28 @@
-import { Connection } from '../../../../src/components/connection';
+import { PropTypes } from 'react-view';
+import { FuryConnection } from '../../../../src/components';
+// import Connection from './connection';
 import { propUtilityForPlayground } from '../../services/playground';
 
 export const connectionConfig = () => {
-  const docgenInfo = Array.isArray(Connection.__docgenInfo)
-    ? Connection.__docgenInfo[0]
-    : Connection.__docgenInfo;
+  const docgenInfo = Array.isArray(FuryConnection.__docgenInfo)
+    ? FuryConnection.__docgenInfo[0]
+    : FuryConnection.__docgenInfo;
   const propsToUse = propUtilityForPlayground(docgenInfo.props);
 
-  propsToUse.isConnected = true;
+  console.log('props js', propsToUse)
+  propsToUse.isConnected = {
+    ...propsToUse.isConnected,
+    required: true,
+    type: PropTypes.Boolean,
+    defaultValue: false,
+  };
 
   return {
     config: {
       componentName: 'Connection',
-      props: { propsToUse },
+      props: propsToUse,
       scope: {
-        Connection,
+        FuryConnection,
       },
       imports: {
         '@elastic/eui': {

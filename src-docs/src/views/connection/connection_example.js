@@ -4,17 +4,16 @@ import { renderToHtml } from '../../services';
 
 import { GuideSectionTypes } from '../../components';
 
-// import { EuiCode } from '../../../../src/components';
-import ConnectionProps from '../../../../src/components/connection/types';
+import { FuryConnection } from '../../../../src/components/';
 
-import Connection from './connection';
+import ConnectionJS from './connection';
 const connectionSource = require('!!raw-loader!./connection');
-const connectionHtml = renderToHtml(Connection);
+const connectionHtml = renderToHtml(ConnectionJS);
 
 import { connectionConfig } from './playground';
 
 export const ConnectionExample = {
-  title: 'Connection',
+  title: 'FuryConnection',
   sections: [
     {
       source: [
@@ -29,14 +28,14 @@ export const ConnectionExample = {
       ],
       text: (
         <p>
-          The <strong>Connection</strong> component is a visual utility for
+          The <strong>FuryConnection</strong> component is a visual utility for
           showing the state of a connection.
         </p>
       ),
-      components: { Connection },
-      demo: <Connection isConnected={false} />,
-      props: { ConnectionProps },
-      snippet: '<Connection isConnected={false} />',
+      // components: { ConnectionJS },
+      demo: <ConnectionJS />,
+      props: { FuryConnection },
+      snippet: '<FuryConnection isConnected={false} />',
     },
   ],
   playground: connectionConfig,

@@ -6,5 +6,5 @@
  * Side Public License, v 1.
  */
 
-export { Connection } from './connection';
+export { FuryConnection } from './connection';
 export { ConnectionProps } from './types';

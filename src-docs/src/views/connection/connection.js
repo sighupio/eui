@@ -1,12 +1,11 @@
 import React from 'react';
 
-import { Connection } from '../../../../src/components';
+import { FuryConnection } from '../../../../src/components';
 
 export default () => {
   return (
     <>
-      <Connection isConnected={false} />
-      <Connection isConnected={true} />
+      <FuryConnection isConnected={false} />
     </>
   );
 };
