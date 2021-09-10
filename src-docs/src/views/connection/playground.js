@@ -18,14 +18,14 @@ export const connectionConfig = () => {
 
   return {
     config: {
-      componentName: 'Connection',
+      componentName: 'FuryConnection',
       props: propsToUse,
       scope: {
         FuryConnection,
       },
       imports: {
         '@elastic/eui': {
-          named: ['Connection'],
+          named: ['FuryConnection'],
         },
       },
     },

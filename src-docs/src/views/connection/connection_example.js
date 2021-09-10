@@ -6,14 +6,15 @@ import { GuideSectionTypes } from '../../components';
 
 import { FuryConnection } from '../../../../src/components/';
 
-import ConnectionJS from './connection';
+import Connection from './connection';
 const connectionSource = require('!!raw-loader!./connection');
-const connectionHtml = renderToHtml(ConnectionJS);
+const connectionHtml = renderToHtml(Connection);
 
 import { connectionConfig } from './playground';
 
 export const ConnectionExample = {
-  title: 'FuryConnection',
+  title: 'Connection',
+  isNew: true,
   sections: [
     {
       source: [
@@ -28,12 +29,12 @@ export const ConnectionExample = {
       ],
       text: (
         <p>
-          The <strong>FuryConnection</strong> component is a visual utility for
+          The <strong>Connection</strong> component is a visual utility for
           showing the state of a connection.
         </p>
       ),
-      // components: { ConnectionJS },
-      demo: <ConnectionJS />,
+      // components: { Connection },
+      demo: <Connection />,
       props: { FuryConnection },
       snippet: '<FuryConnection isConnected={false} />',
     },

@@ -5,7 +5,11 @@ import { FuryConnection } from '../../../../src/components';
 export default () => {
   return (
     <>
-      <FuryConnection isConnected={false} />
+      <div style={{ width: 200 }}>
+        <FuryConnection isConnected={false} />
+        <br />
+        <FuryConnection isConnected={true} />
+      </div>
     </>
   );
 };

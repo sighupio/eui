@@ -9,7 +9,7 @@
 import { HTMLAttributes } from 'react';
 import { CommonProps } from '../common';
 
-export type ConnectionProps = HTMLAttributes<HTMLDivElement> &
+export type FuryConnectionProps = HTMLAttributes<HTMLDivElement> &
   CommonProps & {
     isConnected: boolean;
   };

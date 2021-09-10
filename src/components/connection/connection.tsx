@@ -8,12 +8,8 @@
 
 import React, { FunctionComponent, useState, useEffect, useRef } from 'react';
 // import { animation } from 'src/global_styling/variables/_animations';
-import { ConnectionProps } from './types';
-
-export const FuryConnection: FunctionComponent<ConnectionProps> = ({
-  children,
-  className,
-  // color = 'primary',
+import { FuryConnectionProps } from './types';
+export const FuryConnection: FunctionComponent<FuryConnectionProps> = ({
   isConnected = false,
   ...rest
 }) => {
@@ -58,7 +54,11 @@ export const FuryConnection: FunctionComponent<ConnectionProps> = ({
         'animation',
         'close 0.5s ease-in-out, hide 0.5s 0.5s ease-in'
       );
-    } else {
+    }
+  }, [isConnected]);
+
+  useEffect(() => {
+    if (isConnected === false) {
       // Reset loop and animations
       clearInterval(loop);
       setControlPoint(20);
@@ -71,18 +71,20 @@ export const FuryConnection: FunctionComponent<ConnectionProps> = ({
 
       linesRef.current?.style.setProperty('animation', 'show 1s ease-in');
     }
-  }, [isConnected]); // eslint-disable-line
 
-  useEffect(() => {
     // Set the disconnected lines visible at page load
     linesRef.current?.style.setProperty('opacity', '1');
-  }, []);
+
+    return () => {
+      // Unmount
+      clearInterval(loop);
+    };
+  }, [loop, isConnected]);
 
   return (
     <>
       <div {...rest} className="connection">
-        {/* TODO: give container proportion to be scaled within the parent width */}
-        <svg xmlns="http://www.w3.org/2000/svg">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="-5 5 190 50">
           <path d={`M 0 20 Q 52.5 ${controlPoint}, 95 20 T 180 20`} />
           <path
             ref={pathRef}
@@ -96,12 +98,11 @@ export const FuryConnection: FunctionComponent<ConnectionProps> = ({
           />
           <path d={`M 0 38 Q 52.5 ${controlPoint + 18}, 95 38 T 180 38`} />
           <g ref={linesRef} className="lines">
-            <line x1="33%" y1="14" x2="29%" y2="44" className="bigLine" />
-            <line x1="30%" y1="14" x2="25%" y2="44" className="line" />
-            <line x1="37%" y1="14" x2="32%" y2="44" className="line" />
+            <line x1="50%" y1="14" x2="45%" y2="44" className="bigLine" />
+            <line x1="47%" y1="14" x2="42%" y2="44" className="line" />
+            <line x1="53%" y1="14" x2="48%" y2="44" className="line" />
           </g>
         </svg>
-        {isConnected ? 'connected' : 'not connected'}
       </div>
     </>
   );

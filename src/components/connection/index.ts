@@ -7,4 +7,4 @@
  */
 
 export { FuryConnection } from './connection';
-export { ConnectionProps } from './types';
+export { FuryConnectionProps } from './types';
