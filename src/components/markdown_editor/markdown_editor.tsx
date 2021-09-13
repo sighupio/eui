@@ -214,9 +214,10 @@ export const EuiMarkdownEditor = forwardRef<
     ref
   ) => {
     const [viewMode, setViewMode] = useState<MARKDOWN_MODE>(initialViewMode);
-    const editorId = useMemo(() => _editorId || htmlIdGenerator()(), [
-      _editorId,
-    ]);
+    const editorId = useMemo(
+      () => _editorId || htmlIdGenerator()(),
+      [_editorId]
+    );
 
     const [pluginEditorPlugin, setPluginEditorPlugin] = useState<
       EuiMarkdownEditorUiPlugin | undefined
@@ -456,8 +457,8 @@ export const EuiMarkdownEditor = forwardRef<
                   text = padWithNewlinesIfNeeded(textareaRef.current!, text);
                 }
 
-                const originalSelectionStart = textareaRef.current!
-                  .selectionStart;
+                const originalSelectionStart =
+                  textareaRef.current!.selectionStart;
                 const newSelectionPoint = originalSelectionStart + text.length;
 
                 insertText(textareaRef.current!, {

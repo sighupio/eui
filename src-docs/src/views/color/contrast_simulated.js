@@ -20,9 +20,8 @@ import {
 
 export default () => {
   const { euiTheme, colorMode } = useEuiTheme();
-  const [contrastButtonSelected, setContrastButtonSelected] = useState(
-    'transparent'
-  );
+  const [contrastButtonSelected, setContrastButtonSelected] =
+    useState('transparent');
 
   const transparency = 0.3;
   const BACKGROUND = ['#006837ee', 'rgb(165,0,38)', 'rgb(0,0,0)', 'pink'];

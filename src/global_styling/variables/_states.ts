@@ -71,9 +71,9 @@ export const focus: _EuiThemeFocus = {
 
   // Outline
   outline: {
-    'box-shadow': computed(([color, width]) => `0 0 0 ${width} ${color}`, [
-      'focus.color',
-      'focus.width',
-    ]),
+    'box-shadow': computed(
+      ([color, width]) => `0 0 0 ${width} ${color}`,
+      ['focus.color', 'focus.width']
+    ),
   },
 };

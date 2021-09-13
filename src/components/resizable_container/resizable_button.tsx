@@ -60,9 +60,8 @@ export const EuiResizableButton: FunctionComponent<EuiResizableButtonProps> = ({
   ...rest
 }) => {
   const resizerId = useRef(id || generatePanelId());
-  const {
-    registry: { resizers } = { resizers: {} },
-  } = useEuiResizableContainerContext();
+  const { registry: { resizers } = { resizers: {} } } =
+    useEuiResizableContainerContext();
   const isDisabled = useMemo(
     () =>
       disabled ||

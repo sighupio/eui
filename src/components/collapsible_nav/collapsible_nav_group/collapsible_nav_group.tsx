@@ -97,84 +97,88 @@ export type EuiCollapsibleNavGroupProps = ExclusiveUnion<
   GroupAsDiv
 >;
 
-export const EuiCollapsibleNavGroup: FunctionComponent<EuiCollapsibleNavGroupProps> = ({
-  className,
-  children,
-  id,
-  title,
-  iconType,
-  iconSize = 'l',
-  background = 'none',
-  isCollapsible = false,
-  titleElement = 'h3',
-  titleSize = 'xxs',
-  iconProps,
-  ...rest
-}) => {
-  const groupID = useGeneratedHtmlId({ conditionalId: id });
-  const titleID = `${groupID}__title`;
+export const EuiCollapsibleNavGroup: FunctionComponent<EuiCollapsibleNavGroupProps> =
+  ({
+    className,
+    children,
+    id,
+    title,
+    iconType,
+    iconSize = 'l',
+    background = 'none',
+    isCollapsible = false,
+    titleElement = 'h3',
+    titleSize = 'xxs',
+    iconProps,
+    ...rest
+  }) => {
+    const groupID = useGeneratedHtmlId({ conditionalId: id });
+    const titleID = `${groupID}__title`;
 
-  const classes = classNames(
-    'euiCollapsibleNavGroup',
-    backgroundToClassNameMap[background],
-    {
-      'euiCollapsibleNavGroup--withHeading': title,
-    },
-    className
-  );
-
-  // Warn if consumer passes an iconType without a title
-  if (iconType && !title) {
-    console.warn(
-      'EuiCollapsibleNavGroup will not render an icon without `title`.'
+    const classes = classNames(
+      'euiCollapsibleNavGroup',
+      backgroundToClassNameMap[background],
+      {
+        'euiCollapsibleNavGroup--withHeading': title,
+      },
+      className
     );
-  }
 
-  const content = children && (
-    <div className="euiCollapsibleNavGroup__children">{children}</div>
-  );
+    // Warn if consumer passes an iconType without a title
+    if (iconType && !title) {
+      console.warn(
+        'EuiCollapsibleNavGroup will not render an icon without `title`.'
+      );
+    }
 
-  const headingClasses = 'euiCollapsibleNavGroup__heading';
+    const content = children && (
+      <div className="euiCollapsibleNavGroup__children">{children}</div>
+    );
 
-  const TitleElement = titleElement;
-  const titleContent = title ? (
-    <EuiFlexGroup gutterSize="m" alignItems="center" responsive={false}>
-      {iconType && (
-        <EuiFlexItem grow={false}>
-          <EuiIcon {...iconProps} type={iconType} size={iconSize} />
+    const headingClasses = 'euiCollapsibleNavGroup__heading';
+
+    const TitleElement = titleElement;
+    const titleContent = title ? (
+      <EuiFlexGroup gutterSize="m" alignItems="center" responsive={false}>
+        {iconType && (
+          <EuiFlexItem grow={false}>
+            <EuiIcon {...iconProps} type={iconType} size={iconSize} />
+          </EuiFlexItem>
+        )}
+
+        <EuiFlexItem>
+          <EuiTitle size={titleSize as EuiTitleSize}>
+            <TitleElement
+              id={titleID}
+              className="euiCollapsibleNavGroup__title"
+            >
+              {title}
+            </TitleElement>
+          </EuiTitle>
         </EuiFlexItem>
-      )}
+      </EuiFlexGroup>
+    ) : undefined;
 
-      <EuiFlexItem>
-        <EuiTitle size={titleSize as EuiTitleSize}>
-          <TitleElement id={titleID} className="euiCollapsibleNavGroup__title">
-            {title}
-          </TitleElement>
-        </EuiTitle>
-      </EuiFlexItem>
-    </EuiFlexGroup>
-  ) : undefined;
-
-  if (isCollapsible && title) {
-    return (
-      <EuiAccordion
-        id={groupID}
-        className={classes}
-        buttonClassName={headingClasses}
-        buttonContent={titleContent}
-        initialIsOpen={true}
-        arrowDisplay="right"
-        {...rest}
-      >
-        {content}
-      </EuiAccordion>
-    );
-  } else {
-    return (
-      <div id={groupID} className={classes} {...rest}>
-        {titleContent && <div className={headingClasses}>{titleContent}</div>}
-        {content}
-      </div>
-    );
-  }
-};
+    if (isCollapsible && title) {
+      return (
+        <EuiAccordion
+          id={groupID}
+          className={classes}
+          buttonClassName={headingClasses}
+          buttonContent={titleContent}
+          initialIsOpen={true}
+          arrowDisplay="right"
+          {...rest}
+        >
+          {content}
+        </EuiAccordion>
+      );
+    } else {
+      return (
+        <div id={groupID} className={classes} {...rest}>
+          {titleContent && <div className={headingClasses}>{titleContent}</div>}
+          {content}
+        </div>
+      );
+    }
+  };

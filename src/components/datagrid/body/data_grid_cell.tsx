@@ -52,9 +52,8 @@ const EuiDataGridCellContent: FunctionComponent<
     ...rest
   }) => {
     // React is more permissible than the TS types indicate
-    const CellElement = renderCellValue as JSXElementConstructor<
-      EuiDataGridCellValueElementProps
-    >;
+    const CellElement =
+      renderCellValue as JSXElementConstructor<EuiDataGridCellValueElementProps>;
 
     const positionText = useEuiI18n(
       'euiDataGridCell.position',
@@ -127,8 +126,8 @@ export class EuiDataGridCell extends Component<
     if (this.props.colIndex === 0 && this.props.visibleRowIndex === 0) {
       if (ref && hasResizeObserver) {
         this.observer = new (window as any).ResizeObserver(() => {
-          const rowHeight = this.cellRef.current!.getBoundingClientRect()
-            .height;
+          const rowHeight =
+            this.cellRef.current!.getBoundingClientRect().height;
           if (this.props.setRowHeight) {
             this.props.setRowHeight(rowHeight);
           }
@@ -277,8 +276,8 @@ export class EuiDataGridCell extends Component<
       if (EuiDataGridCell.activeFocusTimeoutId) {
         window.clearTimeout(EuiDataGridCell.activeFocusTimeoutId);
       }
-      EuiDataGridCell.activeFocusTimeoutId = this.focusTimeout = window.setTimeout(
-        () => {
+      EuiDataGridCell.activeFocusTimeoutId = this.focusTimeout =
+        window.setTimeout(() => {
           this.context.setFocusedCell([colIndex, visibleRowIndex]);
 
           const interactables = this.getInteractables();
@@ -286,9 +285,7 @@ export class EuiDataGridCell extends Component<
             interactables[0].focus();
             this.setState({ disableCellTabIndex: true });
           }
-        },
-        0
-      );
+        }, 0);
     }
   };
 

@@ -68,13 +68,15 @@ const titlesPartial: {
 export const title: EuiThemeTitle = SCALES.reduce((acc, size) => {
   acc[size] = {
     fontSize: computed(([{ fontSize }]) => fontSize, [`font.size.${size}`]),
-    lineHeight: computed(([{ lineHeight }]) => lineHeight, [
-      `font.size.${size}`,
-    ]),
+    lineHeight: computed(
+      ([{ lineHeight }]) => lineHeight,
+      [`font.size.${size}`]
+    ),
     color: computed(([color]) => color, ['colors.title']),
-    fontWeight: computed(([fontWeight]) => fontWeight, [
-      `font.weight.${titlesPartial[size].fontWeight}`,
-    ]),
+    fontWeight: computed(
+      ([fontWeight]) => fontWeight,
+      [`font.weight.${titlesPartial[size].fontWeight}`]
+    ),
     letterSpacing: titlesPartial[size].letterSpacing,
   };
   return acc;

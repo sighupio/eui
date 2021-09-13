@@ -13,33 +13,31 @@ export type GuideSectionPropsTable = {
   component: any;
 };
 
-export const GuideSectionPropsTable: FunctionComponent<GuideSectionPropsTable> = ({
-  componentName,
-  component,
-}) => {
-  const docgenInfo = Array.isArray(component.__docgenInfo)
-    ? component.__docgenInfo[0]
-    : component.__docgenInfo;
+export const GuideSectionPropsTable: FunctionComponent<GuideSectionPropsTable> =
+  ({ componentName, component }) => {
+    const docgenInfo = Array.isArray(component.__docgenInfo)
+      ? component.__docgenInfo[0]
+      : component.__docgenInfo;
 
-  const { props } = docgenInfo;
+    const { props } = docgenInfo;
 
-  return (
-    <div>
-      <GuideSectionPropsDescription
-        componentName={componentName}
-        component={component}
-      />
-      <PlaygroundProps
-        isPlayground={false}
-        config={{
-          componentName: componentName,
-          props: propUtilityForPlayground(props),
-          scope: component,
-        }}
-      />
-    </div>
-  );
-};
+    return (
+      <div>
+        <GuideSectionPropsDescription
+          componentName={componentName}
+          component={component}
+        />
+        <PlaygroundProps
+          isPlayground={false}
+          config={{
+            componentName: componentName,
+            props: propUtilityForPlayground(props),
+            scope: component,
+          }}
+        />
+      </div>
+    );
+  };
 
 const PlaygroundProps: FunctionComponent<any> = ({ config, isPlayground }) => {
   const params = useView(config);

@@ -21,22 +21,20 @@ export interface EuiScreenReaderOnlyProps {
   showOnFocus?: boolean;
 }
 
-export const EuiScreenReaderOnly: FunctionComponent<EuiScreenReaderOnlyProps> = ({
-  children,
-  showOnFocus,
-}) => {
-  const classes = classNames(
-    {
-      euiScreenReaderOnly: !showOnFocus,
-      'euiScreenReaderOnly--showOnFocus': showOnFocus,
-    },
-    children.props.className
-  );
+export const EuiScreenReaderOnly: FunctionComponent<EuiScreenReaderOnlyProps> =
+  ({ children, showOnFocus }) => {
+    const classes = classNames(
+      {
+        euiScreenReaderOnly: !showOnFocus,
+        'euiScreenReaderOnly--showOnFocus': showOnFocus,
+      },
+      children.props.className
+    );
 
-  const props = {
-    ...children.props,
-    className: classes,
+    const props = {
+      ...children.props,
+      className: classes,
+    };
+
+    return cloneElement(children, props);
   };
-
-  return cloneElement(children, props);
-};

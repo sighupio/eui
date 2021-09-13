@@ -144,9 +144,8 @@ type DefaultRenderType<T, K extends Renderable<T>> = K extends ReactChild
   : never;
 
 // An array with multiple defaults can only be an array of strings or elements
-type DefaultsRenderType<
-  K extends Array<string | ReactElement>
-> = K extends Array<infer Item> ? Item : never;
+type DefaultsRenderType<K extends Array<string | ReactElement>> =
+  K extends Array<infer Item> ? Item : never;
 
 function useEuiI18n<T extends {}, DEFAULT extends Renderable<T>>(
   token: string,

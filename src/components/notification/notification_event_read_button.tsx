@@ -30,55 +30,50 @@ export type EuiNotificationEventReadButtonProps = Omit<
   eventName: string;
 };
 
-export const EuiNotificationEventReadButton: FunctionComponent<EuiNotificationEventReadButtonProps> = ({
-  id,
-  isRead,
-  onClick,
-  eventName,
-  ...rest
-}) => {
-  const classesReadState = classNames('euiNotificationEventReadButton', {
-    'euiNotificationEventReadButton--isRead': isRead,
-  });
+export const EuiNotificationEventReadButton: FunctionComponent<EuiNotificationEventReadButtonProps> =
+  ({ id, isRead, onClick, eventName, ...rest }) => {
+    const classesReadState = classNames('euiNotificationEventReadButton', {
+      'euiNotificationEventReadButton--isRead': isRead,
+    });
 
-  const markAsReadAria = useEuiI18n(
-    'euiNotificationEventReadButton.markAsReadAria',
-    'Mark {eventName} as read',
-    {
-      eventName,
-    }
-  );
+    const markAsReadAria = useEuiI18n(
+      'euiNotificationEventReadButton.markAsReadAria',
+      'Mark {eventName} as read',
+      {
+        eventName,
+      }
+    );
 
-  const markAsUnreadAria = useEuiI18n(
-    'euiNotificationEventReadButton.markAsUnreadAria',
-    'Mark {eventName} as unread',
-    {
-      eventName,
-    }
-  );
+    const markAsUnreadAria = useEuiI18n(
+      'euiNotificationEventReadButton.markAsUnreadAria',
+      'Mark {eventName} as unread',
+      {
+        eventName,
+      }
+    );
 
-  const markAsRead = useEuiI18n(
-    'euiNotificationEventReadButton.markAsRead',
-    'Mark as read'
-  );
+    const markAsRead = useEuiI18n(
+      'euiNotificationEventReadButton.markAsRead',
+      'Mark as read'
+    );
 
-  const markAsUnread = useEuiI18n(
-    'euiNotificationEventReadButton.markAsUnread',
-    'Mark as unread'
-  );
+    const markAsUnread = useEuiI18n(
+      'euiNotificationEventReadButton.markAsUnread',
+      'Mark as unread'
+    );
 
-  const buttonAriaLabel = isRead ? markAsUnreadAria : markAsReadAria;
-  const buttonTitle = isRead ? markAsUnread : markAsRead;
+    const buttonAriaLabel = isRead ? markAsUnreadAria : markAsReadAria;
+    const buttonTitle = isRead ? markAsUnread : markAsRead;
 
-  return (
-    <EuiButtonIcon
-      iconType="dot"
-      aria-label={buttonAriaLabel}
-      title={buttonTitle}
-      className={classesReadState}
-      onClick={onClick}
-      data-test-subj={`${id}-notificationEventReadButton`}
-      {...rest}
-    />
-  );
-};
+    return (
+      <EuiButtonIcon
+        iconType="dot"
+        aria-label={buttonAriaLabel}
+        title={buttonTitle}
+        className={classesReadState}
+        onClick={onClick}
+        data-test-subj={`${id}-notificationEventReadButton`}
+        {...rest}
+      />
+    );
+  };

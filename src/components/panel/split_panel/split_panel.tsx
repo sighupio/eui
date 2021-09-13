@@ -19,31 +19,28 @@ export type _EuiSplitPanelInnerProps = HTMLAttributes<HTMLDivElement> &
  * Consumed via `EuiSplitPanel.Inner`.
  * Extends most `EuiPanelProps`.
  */
-export const _EuiSplitPanelInner: FunctionComponent<_EuiSplitPanelInnerProps> = ({
-  children,
-  className,
-  ...rest
-}) => {
-  const classes = classNames('euiSplitPanel__inner', className);
+export const _EuiSplitPanelInner: FunctionComponent<_EuiSplitPanelInnerProps> =
+  ({ children, className, ...rest }) => {
+    const classes = classNames('euiSplitPanel__inner', className);
 
-  const panelProps: _EuiPanelProps = {
-    hasShadow: false,
-    color: 'transparent',
-    borderRadius: 'none',
-    hasBorder: false,
+    const panelProps: _EuiPanelProps = {
+      hasShadow: false,
+      color: 'transparent',
+      borderRadius: 'none',
+      hasBorder: false,
+    };
+
+    return (
+      <EuiPanel
+        element="div"
+        className={classes}
+        {...panelProps}
+        {...(rest as _EuiPanelProps)}
+      >
+        {children}
+      </EuiPanel>
+    );
   };
-
-  return (
-    <EuiPanel
-      element="div"
-      className={classes}
-      {...panelProps}
-      {...(rest as _EuiPanelProps)}
-    >
-      {children}
-    </EuiPanel>
-  );
-};
 
 export type _EuiSplitPanelOuterProps = HTMLAttributes<HTMLDivElement> & {
   /**
@@ -65,38 +62,39 @@ export type _EuiSplitPanelOuterProps = HTMLAttributes<HTMLDivElement> & {
  * Consumed via `EuiSplitPanel.Outer`.
  * Extends most `EuiPanelProps`.
  */
-export const _EuiSplitPanelOuter: FunctionComponent<_EuiSplitPanelOuterProps> = ({
-  children,
-  className,
-  direction = 'column',
-  responsive = ['xs', 's'],
-  ...rest
-}) => {
-  const isResponsive = useIsWithinBreakpoints(
-    responsive as EuiBreakpointSize[],
-    !!responsive
-  );
+export const _EuiSplitPanelOuter: FunctionComponent<_EuiSplitPanelOuterProps> =
+  ({
+    children,
+    className,
+    direction = 'column',
+    responsive = ['xs', 's'],
+    ...rest
+  }) => {
+    const isResponsive = useIsWithinBreakpoints(
+      responsive as EuiBreakpointSize[],
+      !!responsive
+    );
 
-  const classes = classNames(
-    'euiSplitPanel',
-    {
-      'euiSplitPanel--row': direction === 'row',
-      'euiSplitPanel-isResponsive': isResponsive,
-    },
-    className
-  );
+    const classes = classNames(
+      'euiSplitPanel',
+      {
+        'euiSplitPanel--row': direction === 'row',
+        'euiSplitPanel-isResponsive': isResponsive,
+      },
+      className
+    );
 
-  return (
-    <EuiPanel
-      paddingSize="none"
-      grow={false}
-      className={classes}
-      {...(rest as _EuiPanelProps)}
-    >
-      {children}
-    </EuiPanel>
-  );
-};
+    return (
+      <EuiPanel
+        paddingSize="none"
+        grow={false}
+        className={classes}
+        {...(rest as _EuiPanelProps)}
+      >
+        {children}
+      </EuiPanel>
+    );
+  };
 
 export const EuiSplitPanel = {
   Outer: _EuiSplitPanelOuter,

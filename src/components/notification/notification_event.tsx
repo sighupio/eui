@@ -86,101 +86,102 @@ export type EuiNotificationEventProps = Omit<
     >;
   };
 
-export const EuiNotificationEvent: FunctionComponent<EuiNotificationEventProps> = ({
-  id,
-  type,
-  severity,
-  badgeColor,
-  iconType,
-  iconAriaLabel,
-  time,
-  title,
-  isRead,
-  primaryAction,
-  primaryActionProps,
-  messages,
-  onRead,
-  onOpenContextMenu,
-  onClickTitle,
-  onClickPrimaryAction,
-  headingLevel = 'h2',
-}) => {
-  const classes = classNames('euiNotificationEvent', {
-    'euiNotificationEvent--withReadState': typeof isRead === 'boolean',
-  });
+export const EuiNotificationEvent: FunctionComponent<EuiNotificationEventProps> =
+  ({
+    id,
+    type,
+    severity,
+    badgeColor,
+    iconType,
+    iconAriaLabel,
+    time,
+    title,
+    isRead,
+    primaryAction,
+    primaryActionProps,
+    messages,
+    onRead,
+    onOpenContextMenu,
+    onClickTitle,
+    onClickPrimaryAction,
+    headingLevel = 'h2',
+  }) => {
+    const classes = classNames('euiNotificationEvent', {
+      'euiNotificationEvent--withReadState': typeof isRead === 'boolean',
+    });
 
-  const classesTitle = classNames('euiNotificationEvent__title', {
-    'euiNotificationEvent__title--isRead': isRead,
-  });
+    const classesTitle = classNames('euiNotificationEvent__title', {
+      'euiNotificationEvent__title--isRead': isRead,
+    });
 
-  const randomHeadingId = htmlIdGenerator()();
+    const randomHeadingId = htmlIdGenerator()();
 
-  const titleProps = {
-    id: randomHeadingId,
-    className: classesTitle,
-    'data-test-subj': `${id}-notificationEventTitle`,
-  };
+    const titleProps = {
+      id: randomHeadingId,
+      className: classesTitle,
+      'data-test-subj': `${id}-notificationEventTitle`,
+    };
 
-  return (
-    <article aria-labelledby={randomHeadingId} className={classes} key={id}>
-      {typeof isRead === 'boolean' && (
-        <div className="euiNotificationEvent__readButton">
-          {!!onRead ? (
-            <EuiNotificationEventReadButton
-              isRead={isRead}
-              onClick={() => onRead(id, isRead)}
-              eventName={title}
-              id={id}
-            />
-          ) : (
-            <EuiNotificationEventReadIcon
-              id={id}
-              isRead={isRead}
-              eventName={title}
-            />
-          )}
-        </div>
-      )}
-
-      <div className="euiNotificationEvent__content">
-        <EuiNotificationEventMeta
-          id={id}
-          type={type}
-          severity={severity}
-          badgeColor={badgeColor}
-          iconType={iconType}
-          iconAriaLabel={iconAriaLabel}
-          time={time}
-          onOpenContextMenu={
-            onOpenContextMenu ? () => onOpenContextMenu(id) : undefined
-          }
-          eventName={title}
-        />
-
-        {onClickTitle ? (
-          <EuiLink onClick={() => onClickTitle(id)} {...titleProps}>
-            {createElement(headingLevel, null, title)}
-          </EuiLink>
-        ) : (
-          createElement(headingLevel, titleProps, title)
-        )}
-
-        <EuiNotificationEventMessages messages={messages} eventName={title} />
-
-        {onClickPrimaryAction && primaryAction && (
-          <div className="euiNotificationEvent__primaryAction">
-            <EuiButtonEmpty
-              flush="left"
-              size="s"
-              {...primaryActionProps}
-              onClick={() => onClickPrimaryAction?.(id)}
-              data-test-subj={`${id}-notificationEventPrimaryAction`}
-            >
-              {primaryAction}
-            </EuiButtonEmpty>
+    return (
+      <article aria-labelledby={randomHeadingId} className={classes} key={id}>
+        {typeof isRead === 'boolean' && (
+          <div className="euiNotificationEvent__readButton">
+            {!!onRead ? (
+              <EuiNotificationEventReadButton
+                isRead={isRead}
+                onClick={() => onRead(id, isRead)}
+                eventName={title}
+                id={id}
+              />
+            ) : (
+              <EuiNotificationEventReadIcon
+                id={id}
+                isRead={isRead}
+                eventName={title}
+              />
+            )}
           </div>
         )}
-      </div>
-    </article>
-  );
-};
+
+        <div className="euiNotificationEvent__content">
+          <EuiNotificationEventMeta
+            id={id}
+            type={type}
+            severity={severity}
+            badgeColor={badgeColor}
+            iconType={iconType}
+            iconAriaLabel={iconAriaLabel}
+            time={time}
+            onOpenContextMenu={
+              onOpenContextMenu ? () => onOpenContextMenu(id) : undefined
+            }
+            eventName={title}
+          />
+
+          {onClickTitle ? (
+            <EuiLink onClick={() => onClickTitle(id)} {...titleProps}>
+              {createElement(headingLevel, null, title)}
+            </EuiLink>
+          ) : (
+            createElement(headingLevel, titleProps, title)
+          )}
+
+          <EuiNotificationEventMessages messages={messages} eventName={title} />
+
+          {onClickPrimaryAction && primaryAction && (
+            <div className="euiNotificationEvent__primaryAction">
+              <EuiButtonEmpty
+                flush="left"
+                size="s"
+                {...primaryActionProps}
+                onClick={() => onClickPrimaryAction?.(id)}
+                data-test-subj={`${id}-notificationEventPrimaryAction`}
+              >
+                {primaryAction}
+              </EuiButtonEmpty>
+            </div>
+          )}
+        </div>
+      </article>
+    );
+  };

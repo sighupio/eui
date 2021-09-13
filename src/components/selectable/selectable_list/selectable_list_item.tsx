@@ -15,9 +15,10 @@ import { EuiSelectableOptionCheckedType } from '../selectable_option';
 import { EuiScreenReaderOnly } from '../../accessibility';
 import { EuiBadge, EuiBadgeProps } from '../../badge';
 
-function resolveIconAndColor(
-  checked: EuiSelectableOptionCheckedType
-): { icon: IconType; color?: IconColor } {
+function resolveIconAndColor(checked: EuiSelectableOptionCheckedType): {
+  icon: IconType;
+  color?: IconColor;
+} {
   if (!checked) {
     return { icon: 'empty' };
   }
@@ -54,9 +55,7 @@ export type EuiSelectableListItemProps = LiHTMLAttributes<HTMLLIElement> &
   };
 
 // eslint-disable-next-line react/prefer-stateless-function
-export class EuiSelectableListItem extends Component<
-  EuiSelectableListItemProps
-> {
+export class EuiSelectableListItem extends Component<EuiSelectableListItemProps> {
   static defaultProps = {
     showIcons: true,
     onFocusBadge: true,

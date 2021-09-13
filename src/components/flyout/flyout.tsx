@@ -164,9 +164,8 @@ type Props<T extends ElementType> = CommonProps & {
 } & _EuiFlyoutProps &
   Omit<PropsOfElement<T>, keyof _EuiFlyoutProps>;
 
-export type EuiFlyoutProps<
-  T extends ElementType = typeof defaultElement
-> = Props<T> & Omit<ComponentPropsWithRef<T>, keyof Props<T>>;
+export type EuiFlyoutProps<T extends ElementType = typeof defaultElement> =
+  Props<T> & Omit<ComponentPropsWithRef<T>, keyof Props<T>>;
 
 export const EuiFlyout = forwardRef(
   <T extends ElementType = typeof defaultElement>(

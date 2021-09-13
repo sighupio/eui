@@ -23,9 +23,8 @@ export function useIsWithinBreakpoints(
   sizes: EuiBreakpointSize[],
   isActive: boolean = true
 ) {
-  const [isWithinBreakpointsValue, setIsWithinBreakpointsValue] = useState<
-    boolean
-  >(false);
+  const [isWithinBreakpointsValue, setIsWithinBreakpointsValue] =
+    useState<boolean>(false);
 
   useEffect(() => {
     function handleResize() {

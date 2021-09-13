@@ -27,7 +27,8 @@ const paddingSizeToClassNameMap = {
 
 export const PADDING_SIZES = keysOf(paddingSizeToClassNameMap);
 
-export type EuiDescribedFormGroupPaddingSize = keyof typeof paddingSizeToClassNameMap;
+export type EuiDescribedFormGroupPaddingSize =
+  keyof typeof paddingSizeToClassNameMap;
 
 export type EuiDescribedFormGroupProps = CommonProps &
   Omit<HTMLAttributes<HTMLDivElement>, 'title'> & {
@@ -59,61 +60,62 @@ export type EuiDescribedFormGroupProps = CommonProps &
     fieldFlexItemProps?: PropsOf<typeof EuiFlexItem>;
   };
 
-export const EuiDescribedFormGroup: FunctionComponent<EuiDescribedFormGroupProps> = ({
-  children,
-  className,
-  gutterSize = 'l',
-  fullWidth = false,
-  titleSize = 'xs',
-  title,
-  description,
-  descriptionFlexItemProps,
-  fieldFlexItemProps,
-  ...rest
-}) => {
-  const classes = classNames(
-    'euiDescribedFormGroup',
-    {
-      'euiDescribedFormGroup--fullWidth': fullWidth,
-    },
-    className
-  );
-
-  const fieldClasses = classNames(
-    'euiDescribedFormGroup__fields',
-    paddingSizeToClassNameMap[titleSize],
-    fieldFlexItemProps && fieldFlexItemProps.className
-  );
-
-  let renderedDescription: ReactNode;
-
-  if (description) {
-    renderedDescription = (
-      <EuiText
-        size="s"
-        color="subdued"
-        className="euiDescribedFormGroup__description"
-      >
-        {description}
-      </EuiText>
+export const EuiDescribedFormGroup: FunctionComponent<EuiDescribedFormGroupProps> =
+  ({
+    children,
+    className,
+    gutterSize = 'l',
+    fullWidth = false,
+    titleSize = 'xs',
+    title,
+    description,
+    descriptionFlexItemProps,
+    fieldFlexItemProps,
+    ...rest
+  }) => {
+    const classes = classNames(
+      'euiDescribedFormGroup',
+      {
+        'euiDescribedFormGroup--fullWidth': fullWidth,
+      },
+      className
     );
-  }
 
-  return (
-    <div role="group" className={classes} {...rest}>
-      <EuiFlexGroup gutterSize={gutterSize}>
-        <EuiFlexItem {...descriptionFlexItemProps}>
-          <EuiTitle size={titleSize} className="euiDescribedFormGroup__title">
-            {title}
-          </EuiTitle>
+    const fieldClasses = classNames(
+      'euiDescribedFormGroup__fields',
+      paddingSizeToClassNameMap[titleSize],
+      fieldFlexItemProps && fieldFlexItemProps.className
+    );
 
-          {renderedDescription}
-        </EuiFlexItem>
+    let renderedDescription: ReactNode;
 
-        <EuiFlexItem {...fieldFlexItemProps} className={fieldClasses}>
-          {children}
-        </EuiFlexItem>
-      </EuiFlexGroup>
-    </div>
-  );
-};
+    if (description) {
+      renderedDescription = (
+        <EuiText
+          size="s"
+          color="subdued"
+          className="euiDescribedFormGroup__description"
+        >
+          {description}
+        </EuiText>
+      );
+    }
+
+    return (
+      <div role="group" className={classes} {...rest}>
+        <EuiFlexGroup gutterSize={gutterSize}>
+          <EuiFlexItem {...descriptionFlexItemProps}>
+            <EuiTitle size={titleSize} className="euiDescribedFormGroup__title">
+              {title}
+            </EuiTitle>
+
+            {renderedDescription}
+          </EuiFlexItem>
+
+          <EuiFlexItem {...fieldFlexItemProps} className={fieldClasses}>
+            {children}
+          </EuiFlexItem>
+        </EuiFlexGroup>
+      </div>
+    );
+  };

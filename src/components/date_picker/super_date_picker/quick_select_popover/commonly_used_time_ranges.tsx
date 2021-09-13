@@ -22,56 +22,54 @@ export interface EuiCommonlyUsedTimeRangesProps {
   commonlyUsedRanges: DurationRange[];
 }
 
-export const EuiCommonlyUsedTimeRanges: FunctionComponent<EuiCommonlyUsedTimeRangesProps> = ({
-  applyTime,
-  commonlyUsedRanges,
-}) => {
-  const legendId = generateId();
-  const links = commonlyUsedRanges.map(({ start, end, label }) => {
-    const applyCommonlyUsed = () => {
-      applyTime({ start, end });
-    };
-    const dataTestSubj = label
-      ? `superDatePickerCommonlyUsed_${label.replace(' ', '_')}`
-      : undefined;
-    return (
-      <EuiFlexItem
-        key={label}
-        component="li"
-        className="euiQuickSelectPopover__sectionItem"
-      >
-        <EuiLink onClick={applyCommonlyUsed} data-test-subj={dataTestSubj}>
-          {label}
-        </EuiLink>
-      </EuiFlexItem>
-    );
-  });
-
-  return (
-    <fieldset>
-      <EuiTitle size="xxxs">
-        <legend id={legendId}>
-          <EuiI18n
-            token="euiCommonlyUsedTimeRanges.legend"
-            default="Commonly used"
-          />
-        </legend>
-      </EuiTitle>
-      <div className="euiQuickSelectPopover__section">
-        <EuiFlexGrid
-          aria-labelledby={legendId}
-          gutterSize="s"
-          columns={2}
-          direction="column"
-          responsive={false}
-          component="ul"
+export const EuiCommonlyUsedTimeRanges: FunctionComponent<EuiCommonlyUsedTimeRangesProps> =
+  ({ applyTime, commonlyUsedRanges }) => {
+    const legendId = generateId();
+    const links = commonlyUsedRanges.map(({ start, end, label }) => {
+      const applyCommonlyUsed = () => {
+        applyTime({ start, end });
+      };
+      const dataTestSubj = label
+        ? `superDatePickerCommonlyUsed_${label.replace(' ', '_')}`
+        : undefined;
+      return (
+        <EuiFlexItem
+          key={label}
+          component="li"
+          className="euiQuickSelectPopover__sectionItem"
         >
-          {links}
-        </EuiFlexGrid>
-      </div>
-      <EuiHorizontalRule margin="s" />
-    </fieldset>
-  );
-};
+          <EuiLink onClick={applyCommonlyUsed} data-test-subj={dataTestSubj}>
+            {label}
+          </EuiLink>
+        </EuiFlexItem>
+      );
+    });
+
+    return (
+      <fieldset>
+        <EuiTitle size="xxxs">
+          <legend id={legendId}>
+            <EuiI18n
+              token="euiCommonlyUsedTimeRanges.legend"
+              default="Commonly used"
+            />
+          </legend>
+        </EuiTitle>
+        <div className="euiQuickSelectPopover__section">
+          <EuiFlexGrid
+            aria-labelledby={legendId}
+            gutterSize="s"
+            columns={2}
+            direction="column"
+            responsive={false}
+            component="ul"
+          >
+            {links}
+          </EuiFlexGrid>
+        </div>
+        <EuiHorizontalRule margin="s" />
+      </fieldset>
+    );
+  };
 
 EuiCommonlyUsedTimeRanges.displayName = 'EuiCommonlyUsedTimeRanges';

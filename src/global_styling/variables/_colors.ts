@@ -196,13 +196,15 @@ export const shade_colors: _EuiThemeShadeColors = {
 };
 
 export const special_colors: _EuiThemeSpecialColors = {
-  body: computed(([lightestShade]) => tint(lightestShade, 0.5), [
-    'colors.lightestShade',
-  ]),
+  body: computed(
+    ([lightestShade]) => tint(lightestShade, 0.5),
+    ['colors.lightestShade']
+  ),
   highlight: '#FFFCDD',
-  disabled: computed(([darkestShade]) => tint(darkestShade, 0.7), [
-    'colors.darkestShade',
-  ]),
+  disabled: computed(
+    ([darkestShade]) => tint(darkestShade, 0.7),
+    ['colors.darkestShade']
+  ),
   disabledText: computed(makeDisabledContrastColor('colors.disabled')),
   shadow: computed(({ colors }) =>
     shade(saturate(colors.mediumShade, 0.25), 0.5)
@@ -252,13 +254,15 @@ export const dark_colors: _EuiThemeColors = {
   ...dark_shades,
 
   // Special
-  body: computed(([lightestShade]) => shade(lightestShade, 0.45), [
-    'colors.lightestShade',
-  ]),
+  body: computed(
+    ([lightestShade]) => shade(lightestShade, 0.45),
+    ['colors.lightestShade']
+  ),
   highlight: '#2E2D25',
-  disabled: computed(([darkestShade]) => tint(darkestShade, 0.7), [
-    'colors.darkestShade',
-  ]),
+  disabled: computed(
+    ([darkestShade]) => tint(darkestShade, 0.7),
+    ['colors.darkestShade']
+  ),
   disabledText: computed(makeDisabledContrastColor('colors.disabled')),
   shadow: computed(({ colors }) =>
     shade(saturate(colors.mediumShade, 0.25), 0.5)

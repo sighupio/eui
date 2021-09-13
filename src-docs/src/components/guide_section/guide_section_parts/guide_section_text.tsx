@@ -11,36 +11,33 @@ type GuideSectionExampleText = {
   wrapText?: boolean;
 };
 
-export const GuideSectionExampleText: FunctionComponent<GuideSectionExampleText> = ({
-  title,
-  children,
-  wrapText = true,
-}) => {
-  let titleNode;
+export const GuideSectionExampleText: FunctionComponent<GuideSectionExampleText> =
+  ({ title, children, wrapText = true }) => {
+    let titleNode;
 
-  if (title) {
-    titleNode = (
+    if (title) {
+      titleNode = (
+        <>
+          <EuiSpacer />
+          <EuiTitle>
+            <h2>{title}</h2>
+          </EuiTitle>
+          <EuiSpacer size="m" />
+        </>
+      );
+    }
+
+    let textNode = children;
+
+    if (children && wrapText) {
+      textNode = <EuiText>{children}</EuiText>;
+    }
+
+    return (
       <>
-        <EuiSpacer />
-        <EuiTitle>
-          <h2>{title}</h2>
-        </EuiTitle>
-        <EuiSpacer size="m" />
+        {titleNode}
+        {textNode}
+        {(titleNode || textNode) && <EuiSpacer />}
       </>
     );
-  }
-
-  let textNode = children;
-
-  if (children && wrapText) {
-    textNode = <EuiText>{children}</EuiText>;
-  }
-
-  return (
-    <>
-      {titleNode}
-      {textNode}
-      {(titleNode || textNode) && <EuiSpacer />}
-    </>
-  );
-};
+  };

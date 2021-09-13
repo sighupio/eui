@@ -43,8 +43,7 @@ const HeaderUpdates = () => {
     },
     {
       title: 'Kibana 7.0 is turning heads',
-      text:
-        'Simplified navigation, responsive dashboards, dark mode… pick your favorite.',
+      text: 'Simplified navigation, responsive dashboards, dark mode… pick your favorite.',
       action: (
         <EuiLink
           target="_blank"
@@ -59,8 +58,7 @@ const HeaderUpdates = () => {
     },
     {
       title: 'Enter dark mode',
-      text:
-        'Kibana now supports the easy-on-the-eyes theme across the entire UI.',
+      text: 'Kibana now supports the easy-on-the-eyes theme across the entire UI.',
       action: <EuiLink href="">Go to Advanced Settings</EuiLink>,
       date: '10 April 2019',
       badge: <EuiBadge color="hollow">7.0</EuiBadge>,
@@ -97,8 +95,7 @@ const HeaderUpdates = () => {
     },
     {
       title: 'Rollups made simple in Kibana',
-      text:
-        'Save space and preserve the integrity of your data directly in the UI.',
+      text: 'Save space and preserve the integrity of your data directly in the UI.',
       action: (
         <EuiLink
           target="_blank"

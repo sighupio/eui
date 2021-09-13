@@ -915,12 +915,8 @@ export class EuiBasicTable<T = any> extends Component<
 
     columns.forEach((column: EuiBasicTableColumn<T>) => {
       const footer = getColumnFooter(column, { items, pagination });
-      const {
-        mobileOptions,
-        isMobileHeader,
-        field,
-        align,
-      } = column as EuiTableFieldDataColumnType<T>;
+      const { mobileOptions, isMobileHeader, field, align } =
+        column as EuiTableFieldDataColumnType<T>;
 
       if ((mobileOptions && mobileOptions!.only) || isMobileHeader) {
         return; // exclude columns that only exist for mobile headers

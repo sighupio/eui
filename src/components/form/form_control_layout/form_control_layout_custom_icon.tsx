@@ -28,45 +28,39 @@ export type EuiFormControlLayoutCustomIconProps = CommonProps &
       | ((el: HTMLButtonElement | HTMLSpanElement | null) => void);
   };
 
-export const EuiFormControlLayoutCustomIcon: FunctionComponent<EuiFormControlLayoutCustomIconProps> = ({
-  className,
-  onClick,
-  type,
-  iconRef,
-  size,
-  ...rest
-}) => {
-  const classes = classNames('euiFormControlLayoutCustomIcon', className, {
-    'euiFormControlLayoutCustomIcon--clickable': onClick,
-  });
+export const EuiFormControlLayoutCustomIcon: FunctionComponent<EuiFormControlLayoutCustomIconProps> =
+  ({ className, onClick, type, iconRef, size, ...rest }) => {
+    const classes = classNames('euiFormControlLayoutCustomIcon', className, {
+      'euiFormControlLayoutCustomIcon--clickable': onClick,
+    });
 
-  if (onClick) {
+    if (onClick) {
+      return (
+        <button
+          type="button"
+          onClick={onClick}
+          className={classes}
+          ref={iconRef}
+          {...rest}
+        >
+          <EuiIcon
+            className="euiFormControlLayoutCustomIcon__icon"
+            aria-hidden="true"
+            size={size}
+            type={type}
+          />
+        </button>
+      );
+    }
+
     return (
-      <button
-        type="button"
-        onClick={onClick}
-        className={classes}
-        ref={iconRef}
-        {...rest}
-      >
+      <span className={classes} ref={iconRef} {...rest}>
         <EuiIcon
           className="euiFormControlLayoutCustomIcon__icon"
           aria-hidden="true"
           size={size}
           type={type}
         />
-      </button>
+      </span>
     );
-  }
-
-  return (
-    <span className={classes} ref={iconRef} {...rest}>
-      <EuiIcon
-        className="euiFormControlLayoutCustomIcon__icon"
-        aria-hidden="true"
-        size={size}
-        type={type}
-      />
-    </span>
-  );
-};
+  };

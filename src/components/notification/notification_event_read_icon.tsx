@@ -26,50 +26,46 @@ export type EuiNotificationEventReadIconProps = Omit<
   eventName: string;
 };
 
-export const EuiNotificationEventReadIcon: FunctionComponent<EuiNotificationEventReadIconProps> = ({
-  id,
-  isRead,
-  eventName,
-  ...rest
-}) => {
-  const classesReadState = classNames('euiNotificationEventReadIcon', {
-    'euiNotificationEventReadIcon--isRead': isRead,
-  });
+export const EuiNotificationEventReadIcon: FunctionComponent<EuiNotificationEventReadIconProps> =
+  ({ id, isRead, eventName, ...rest }) => {
+    const classesReadState = classNames('euiNotificationEventReadIcon', {
+      'euiNotificationEventReadIcon--isRead': isRead,
+    });
 
-  const readAria = useEuiI18n(
-    'euiNotificationEventReadIcon.readAria',
-    '{eventName} is read',
-    {
-      eventName,
-    }
-  );
+    const readAria = useEuiI18n(
+      'euiNotificationEventReadIcon.readAria',
+      '{eventName} is read',
+      {
+        eventName,
+      }
+    );
 
-  const unreadAria = useEuiI18n(
-    'euiNotificationEventReadIcon.unreadAria',
-    '{eventName} is unread',
-    {
-      eventName,
-    }
-  );
-  const readTitle = useEuiI18n('euiNotificationEventReadIcon.read', 'Read');
-  const unreadTitle = useEuiI18n(
-    'euiNotificationEventReadIcon.unread',
-    'Unread'
-  );
+    const unreadAria = useEuiI18n(
+      'euiNotificationEventReadIcon.unreadAria',
+      '{eventName} is unread',
+      {
+        eventName,
+      }
+    );
+    const readTitle = useEuiI18n('euiNotificationEventReadIcon.read', 'Read');
+    const unreadTitle = useEuiI18n(
+      'euiNotificationEventReadIcon.unread',
+      'Unread'
+    );
 
-  const iconAriaLabel = isRead ? readAria : unreadAria;
-  const iconTitle = isRead ? readTitle : unreadTitle;
+    const iconAriaLabel = isRead ? readAria : unreadAria;
+    const iconTitle = isRead ? readTitle : unreadTitle;
 
-  return (
-    <div className={classesReadState}>
-      <EuiIcon
-        type="dot"
-        aria-label={iconAriaLabel}
-        title={iconTitle}
-        color="primary"
-        data-test-subj={`${id}-notificationEventReadIcon`}
-        {...rest}
-      />
-    </div>
-  );
-};
+    return (
+      <div className={classesReadState}>
+        <EuiIcon
+          type="dot"
+          aria-label={iconAriaLabel}
+          title={iconTitle}
+          color="primary"
+          data-test-subj={`${id}-notificationEventReadIcon`}
+          {...rest}
+        />
+      </div>
+    );
+  };

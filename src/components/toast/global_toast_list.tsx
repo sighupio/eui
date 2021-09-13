@@ -99,15 +99,13 @@ export class EuiGlobalToastList extends Component<
       this.listElement.scrollTop = position + distanceToDestination * 0.25;
 
       if (this.isScrollingToBottom) {
-        this.isScrollingAnimationFrame = window.requestAnimationFrame(
-          scrollToBottom
-        );
+        this.isScrollingAnimationFrame =
+          window.requestAnimationFrame(scrollToBottom);
       }
     };
 
-    this.startScrollingAnimationFrame = window.requestAnimationFrame(
-      scrollToBottom
-    );
+    this.startScrollingAnimationFrame =
+      window.requestAnimationFrame(scrollToBottom);
   }
 
   onMouseEnter = () => {
@@ -245,14 +243,8 @@ export class EuiGlobalToastList extends Component<
   }
 
   render() {
-    const {
-      className,
-      toasts,
-      dismissToast,
-      toastLifeTimeMs,
-      side,
-      ...rest
-    } = this.props;
+    const { className, toasts, dismissToast, toastLifeTimeMs, side, ...rest } =
+      this.props;
 
     const renderedToasts = toasts.map((toast) => {
       const { text, toastLifeTimeMs, ...rest } = toast;

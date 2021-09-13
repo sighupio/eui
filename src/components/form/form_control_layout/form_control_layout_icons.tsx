@@ -44,9 +44,7 @@ export interface EuiFormControlLayoutIconsProps {
   compressed?: boolean;
 }
 
-export class EuiFormControlLayoutIcons extends Component<
-  EuiFormControlLayoutIconsProps
-> {
+export class EuiFormControlLayoutIcons extends Component<EuiFormControlLayoutIconsProps> {
   render() {
     const { icon } = this.props;
     const iconSide = isIconShape(icon) && icon.side ? icon.side : 'left';

@@ -65,104 +65,105 @@ export type EuiNotificationEventMetaProps = {
   >;
 };
 
-export const EuiNotificationEventMeta: FunctionComponent<EuiNotificationEventMetaProps> = ({
-  id,
-  iconType,
-  type,
-  time,
-  badgeColor = 'hollow',
-  severity,
-  eventName,
-  iconAriaLabel,
-  onOpenContextMenu,
-}) => {
-  const [isPopoverOpen, setIsPopoverOpen] = useState(false);
-  const classes = classNames('euiNotificationEventMeta', {
-    'euiNotificationEventMeta--hasContextMenu': onOpenContextMenu,
-  });
+export const EuiNotificationEventMeta: FunctionComponent<EuiNotificationEventMetaProps> =
+  ({
+    id,
+    iconType,
+    type,
+    time,
+    badgeColor = 'hollow',
+    severity,
+    eventName,
+    iconAriaLabel,
+    onOpenContextMenu,
+  }) => {
+    const [isPopoverOpen, setIsPopoverOpen] = useState(false);
+    const classes = classNames('euiNotificationEventMeta', {
+      'euiNotificationEventMeta--hasContextMenu': onOpenContextMenu,
+    });
 
-  const [contextMenuItems, setContextMenuItems] = useState<
-    ReturnType<NonNullable<typeof onOpenContextMenu>>
-  >([]);
+    const [contextMenuItems, setContextMenuItems] = useState<
+      ReturnType<NonNullable<typeof onOpenContextMenu>>
+    >([]);
 
-  const randomPopoverId = htmlIdGenerator()();
+    const randomPopoverId = htmlIdGenerator()();
 
-  const ariaAttribute = iconAriaLabel
-    ? { 'aria-label': iconAriaLabel }
-    : { 'aria-hidden': true };
+    const ariaAttribute = iconAriaLabel
+      ? { 'aria-label': iconAriaLabel }
+      : { 'aria-hidden': true };
 
-  const onOpenPopover = () => {
-    setIsPopoverOpen(!isPopoverOpen);
-    if (onOpenContextMenu) {
-      setContextMenuItems(onOpenContextMenu());
-    }
-  };
+    const onOpenPopover = () => {
+      setIsPopoverOpen(!isPopoverOpen);
+      if (onOpenContextMenu) {
+        setContextMenuItems(onOpenContextMenu());
+      }
+    };
 
-  return (
-    <div className={classes}>
-      <div className="euiNotificationEventMeta__section">
-        {iconType && (
-          <EuiIcon
-            className="euiNotificationEventMeta__icon"
-            type={iconType}
-            {...ariaAttribute}
-          />
-        )}
+    return (
+      <div className={classes}>
+        <div className="euiNotificationEventMeta__section">
+          {iconType && (
+            <EuiIcon
+              className="euiNotificationEventMeta__icon"
+              type={iconType}
+              {...ariaAttribute}
+            />
+          )}
 
-        {type && (
-          <EuiBadge
-            className="euiNotificationEventMeta__badge"
-            color={badgeColor}
-          >
-            {severity ? `${type}: ${severity}` : type}
-          </EuiBadge>
-        )}
-      </div>
-
-      <div className="euiNotificationEventMeta__section">
-        <span className="euiNotificationEventMeta__time">{time}</span>
-      </div>
-
-      {onOpenContextMenu && (
-        <div className="euiNotificationEventMeta__contextMenuWrapper">
-          <EuiPopover
-            id={randomPopoverId}
-            ownFocus
-            repositionOnScroll
-            isOpen={isPopoverOpen}
-            panelPaddingSize="none"
-            anchorPosition="leftUp"
-            button={
-              <EuiI18n
-                token="euiNotificationEventMeta.contextMenuButton"
-                default="Menu for {eventName}"
-                values={{
-                  eventName,
-                }}
-              >
-                {(contextMenuButton: string) => (
-                  <EuiButtonIcon
-                    aria-label={contextMenuButton}
-                    aria-controls={randomPopoverId}
-                    aria-expanded={isPopoverOpen}
-                    aria-haspopup="true"
-                    iconType="boxesVertical"
-                    color="subdued"
-                    onClick={onOpenPopover}
-                    data-test-subj={`${id}-notificationEventMetaButton`}
-                  />
-                )}
-              </EuiI18n>
-            }
-            closePopover={() => setIsPopoverOpen(false)}
-          >
-            {/* The EuiContextMenu is wrapped with a div so it closes after an item is clicked */}
-            <div onClick={() => setIsPopoverOpen(false)}>
-              <EuiContextMenuPanel items={contextMenuItems} />
-            </div>
-          </EuiPopover>
+          {type && (
+            <EuiBadge
+              className="euiNotificationEventMeta__badge"
+              color={badgeColor}
+            >
+              {severity ? `${type}: ${severity}` : type}
+            </EuiBadge>
+          )}
         </div>
-      )}
-    </div>
-  );
-};
+
+        <div className="euiNotificationEventMeta__section">
+          <span className="euiNotificationEventMeta__time">{time}</span>
+        </div>
+
+        {onOpenContextMenu && (
+          <div className="euiNotificationEventMeta__contextMenuWrapper">
+            <EuiPopover
+              id={randomPopoverId}
+              ownFocus
+              repositionOnScroll
+              isOpen={isPopoverOpen}
+              panelPaddingSize="none"
+              anchorPosition="leftUp"
+              button={
+                <EuiI18n
+                  token="euiNotificationEventMeta.contextMenuButton"
+                  default="Menu for {eventName}"
+                  values={{
+                    eventName,
+                  }}
+                >
+                  {(contextMenuButton: string) => (
+                    <EuiButtonIcon
+                      aria-label={contextMenuButton}
+                      aria-controls={randomPopoverId}
+                      aria-expanded={isPopoverOpen}
+                      aria-haspopup="true"
+                      iconType="boxesVertical"
+                      color="subdued"
+                      onClick={onOpenPopover}
+                      data-test-subj={`${id}-notificationEventMetaButton`}
+                    />
+                  )}
+                </EuiI18n>
+              }
+              closePopover={() => setIsPopoverOpen(false)}
+            >
+              {/* The EuiContextMenu is wrapped with a div so it closes after an item is clicked */}
+              <div onClick={() => setIsPopoverOpen(false)}>
+                <EuiContextMenuPanel items={contextMenuItems} />
+              </div>
+            </EuiPopover>
+          </div>
+        )}
+      </div>
+    );
+  };

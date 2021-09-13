@@ -95,7 +95,8 @@ See https://ela.st/euicodeeditor for migration options.`
   aceEditorRef = (aceEditor: AceEditor | null) => {
     if (aceEditor) {
       this.aceEditor = aceEditor;
-      const textbox = aceEditor.editor.textInput.getElement() as HTMLTextAreaElement;
+      const textbox =
+        aceEditor.editor.textInput.getElement() as HTMLTextAreaElement;
       textbox.tabIndex = -1;
       textbox.addEventListener('keydown', this.onKeydownAce);
       setOrRemoveAttribute(textbox, 'aria-label', this.props['aria-label']);

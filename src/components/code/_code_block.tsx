@@ -193,10 +193,10 @@ export const EuiCodeBlockImpl: FunctionComponent<EuiCodeBlockImplProps> = ({
       : highlightByLine(children, language);
   }, [children, language, inline]);
 
-  const isVirtualized = useMemo(() => _isVirtualized && Array.isArray(data), [
-    _isVirtualized,
-    data,
-  ]);
+  const isVirtualized = useMemo(
+    () => _isVirtualized && Array.isArray(data),
+    [_isVirtualized, data]
+  );
 
   // Used by `pre` when `isVirtualized=false` or `children` is not parsable (`isVirtualized=false`)
   const content: ReactElement[] | ReactNode = useMemo(() => {

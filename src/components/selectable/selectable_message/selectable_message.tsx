@@ -22,23 +22,19 @@ export type EuiSelectableMessageProps = Omit<
     bordered?: boolean;
   };
 
-export const EuiSelectableMessage: FunctionComponent<EuiSelectableMessageProps> = ({
-  children,
-  className,
-  bordered = false,
-  ...rest
-}) => {
-  const classes = classNames(
-    'euiSelectableMessage',
-    {
-      'euiSelectableMessage--bordered': bordered,
-    },
-    className
-  );
+export const EuiSelectableMessage: FunctionComponent<EuiSelectableMessageProps> =
+  ({ children, className, bordered = false, ...rest }) => {
+    const classes = classNames(
+      'euiSelectableMessage',
+      {
+        'euiSelectableMessage--bordered': bordered,
+      },
+      className
+    );
 
-  return (
-    <EuiText color="subdued" size="xs" className={classes} {...rest}>
-      {children}
-    </EuiText>
-  );
-};
+    return (
+      <EuiText color="subdued" size="xs" className={classes} {...rest}>
+        {children}
+      </EuiText>
+    );
+  };

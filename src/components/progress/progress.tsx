@@ -136,10 +136,9 @@ type Determinate = EuiProgressProps &
     labelProps?: HTMLAttributes<HTMLSpanElement>;
   };
 
-export const EuiProgress: FunctionComponent<ExclusiveUnion<
-  Determinate,
-  Indeterminate
->> = ({
+export const EuiProgress: FunctionComponent<
+  ExclusiveUnion<Determinate, Indeterminate>
+> = ({
   className,
   color = 'success',
   size = 'm',

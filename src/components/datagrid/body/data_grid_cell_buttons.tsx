@@ -67,9 +67,8 @@ export const EuiDataGridCellButtons = ({
       ? column.cellActions.map(
           (Action: EuiDataGridColumnCellAction, idx: number) => {
             // React is more permissible than the TS types indicate
-            const CellButtonElement = Action as JSXElementConstructor<
-              EuiDataGridColumnCellActionProps
-            >;
+            const CellButtonElement =
+              Action as JSXElementConstructor<EuiDataGridColumnCellActionProps>;
             return (
               <CellButtonElement
                 key={idx}

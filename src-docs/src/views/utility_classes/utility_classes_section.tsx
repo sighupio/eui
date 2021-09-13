@@ -15,47 +15,43 @@ type UtilityClassesSection = {
   snippet?: GuideSectionExample['tabContent'];
 };
 
-export const UtilityClassesSection: FunctionComponent<UtilityClassesSection> = ({
-  code,
-  description,
-  example,
-  snippet,
-}) => {
-  return (
-    <EuiFlexGroup>
-      <EuiFlexItem>
-        <EuiText size="s">
-          <h3>
-            <EuiCopy textToCopy={code}>
-              {(copy) => (
-                <button onClick={copy}>
-                  <EuiCode language="html" className="eui-textInheritColor">
-                    {code}
-                  </EuiCode>
-                </button>
+export const UtilityClassesSection: FunctionComponent<UtilityClassesSection> =
+  ({ code, description, example, snippet }) => {
+    return (
+      <EuiFlexGroup>
+        <EuiFlexItem>
+          <EuiText size="s">
+            <h3>
+              <EuiCopy textToCopy={code}>
+                {(copy) => (
+                  <button onClick={copy}>
+                    <EuiCode language="html" className="eui-textInheritColor">
+                      {code}
+                    </EuiCode>
+                  </button>
+                )}
+              </EuiCopy>
+            </h3>
+            {description}
+          </EuiText>
+        </EuiFlexItem>
+        <EuiFlexItem>
+          <EuiSplitPanel.Outer style={{ overflow: 'hidden' }}>
+            <EuiSplitPanel.Inner>{example}</EuiSplitPanel.Inner>
+            <EuiSplitPanel.Inner color="subdued">
+              {snippet && (
+                <EuiCodeBlock
+                  isCopyable={true}
+                  paddingSize="none"
+                  transparentBackground={true}
+                  language="html"
+                >
+                  {snippet}
+                </EuiCodeBlock>
               )}
-            </EuiCopy>
-          </h3>
-          {description}
-        </EuiText>
-      </EuiFlexItem>
-      <EuiFlexItem>
-        <EuiSplitPanel.Outer style={{ overflow: 'hidden' }}>
-          <EuiSplitPanel.Inner>{example}</EuiSplitPanel.Inner>
-          <EuiSplitPanel.Inner color="subdued">
-            {snippet && (
-              <EuiCodeBlock
-                isCopyable={true}
-                paddingSize="none"
-                transparentBackground={true}
-                language="html"
-              >
-                {snippet}
-              </EuiCodeBlock>
-            )}
-          </EuiSplitPanel.Inner>
-        </EuiSplitPanel.Outer>
-      </EuiFlexItem>
-    </EuiFlexGroup>
-  );
-};
+            </EuiSplitPanel.Inner>
+          </EuiSplitPanel.Outer>
+        </EuiFlexItem>
+      </EuiFlexGroup>
+    );
+  };

@@ -42,9 +42,8 @@ export const Sparklines = () => {
 
   const TIME_DATA_SMALL_REVERSE = cloneDeep(TIME_DATA_SMALL).reverse();
   const TIME_DATA_SMALL_REVERSE_MAJOR = cloneDeep(TIME_DATA_SMALL_REVERSE);
-  TIME_DATA_SMALL_REVERSE_MAJOR[
-    TIME_DATA_SMALL_REVERSE_MAJOR.length - 1
-  ][1] = -100;
+  TIME_DATA_SMALL_REVERSE_MAJOR[TIME_DATA_SMALL_REVERSE_MAJOR.length - 1][1] =
+    -100;
 
   return (
     <Fragment>

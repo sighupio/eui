@@ -31,72 +31,68 @@ export interface EuiTourStepIndicatorProps
   status: EuiTourStepStatus;
 }
 
-export const EuiTourStepIndicator: FunctionComponent<EuiTourStepIndicatorProps> = ({
-  className,
-  number,
-  status,
-  ...rest
-}) => {
-  const classes = classNames(
-    'euiTourStepIndicator',
-    status ? statusToClassNameMap[status] : undefined,
-    className
-  );
+export const EuiTourStepIndicator: FunctionComponent<EuiTourStepIndicatorProps> =
+  ({ className, number, status, ...rest }) => {
+    const classes = classNames(
+      'euiTourStepIndicator',
+      status ? statusToClassNameMap[status] : undefined,
+      className
+    );
 
-  let indicatorIcon: ReactNode;
-  if (status === 'active') {
-    indicatorIcon = (
-      <EuiI18n token="euiTourStepIndicator.isActive" default="active">
-        {(isActive: string) => (
-          <EuiIcon
-            type="dot"
-            className="euiStepNumber__icon"
-            aria-label={isActive}
-            color="success"
-            aria-current="step"
-          />
-        )}
-      </EuiI18n>
-    );
-  } else if (status === 'complete') {
-    indicatorIcon = (
-      <EuiI18n token="euiTourStepIndicator.isComplete" default="complete">
-        {(isComplete: string) => (
-          <EuiIcon
-            type="dot"
-            className="euiStepNumber__icon"
-            aria-label={isComplete}
-            color="subdued"
-          />
-        )}
-      </EuiI18n>
-    );
-  } else if (status === 'incomplete') {
-    indicatorIcon = (
-      <EuiI18n token="euiTourStepIndicator.isIncomplete" default="incomplete">
-        {(isIncomplete: string) => (
-          <EuiIcon
-            type="dot"
-            className="euiStepNumber__icon"
-            aria-label={isIncomplete}
-            color="subdued"
-          />
-        )}
-      </EuiI18n>
-    );
-  }
+    let indicatorIcon: ReactNode;
+    if (status === 'active') {
+      indicatorIcon = (
+        <EuiI18n token="euiTourStepIndicator.isActive" default="active">
+          {(isActive: string) => (
+            <EuiIcon
+              type="dot"
+              className="euiStepNumber__icon"
+              aria-label={isActive}
+              color="success"
+              aria-current="step"
+            />
+          )}
+        </EuiI18n>
+      );
+    } else if (status === 'complete') {
+      indicatorIcon = (
+        <EuiI18n token="euiTourStepIndicator.isComplete" default="complete">
+          {(isComplete: string) => (
+            <EuiIcon
+              type="dot"
+              className="euiStepNumber__icon"
+              aria-label={isComplete}
+              color="subdued"
+            />
+          )}
+        </EuiI18n>
+      );
+    } else if (status === 'incomplete') {
+      indicatorIcon = (
+        <EuiI18n token="euiTourStepIndicator.isIncomplete" default="incomplete">
+          {(isIncomplete: string) => (
+            <EuiIcon
+              type="dot"
+              className="euiStepNumber__icon"
+              aria-label={isIncomplete}
+              color="subdued"
+            />
+          )}
+        </EuiI18n>
+      );
+    }
 
-  return (
-    <EuiI18n
-      token="euiTourStepIndicator.ariaLabel"
-      default="Step {number} {status}"
-      values={{ status, number }}
-    >
-      {(ariaLabel: string) => (
-        <li className={classes} aria-label={ariaLabel} {...rest}>
-          {indicatorIcon}
-        </li>
-      )}
-    </EuiI18n>
-  );
-};
+    return (
+      <EuiI18n
+        token="euiTourStepIndicator.ariaLabel"
+        default="Step {number} {status}"
+        values={{ status, number }}
+      >
+        {(ariaLabel: string) => (
+          <li className={classes} aria-label={ariaLabel} {...rest}>
+            {indicatorIcon}
+          </li>
+        )}
+      </EuiI18n>
+    );
+  };

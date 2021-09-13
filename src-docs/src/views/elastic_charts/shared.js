@@ -12,9 +12,8 @@ import {
 import { BarSeries, LineSeries, AreaSeries } from '@elastic/charts';
 import { devDependencies } from '../../../../package';
 
-export const chartsVersion = devDependencies['@elastic/charts'].match(
-  /\d+\.\d+\.\d+/
-)[0];
+export const chartsVersion =
+  devDependencies['@elastic/charts'].match(/\d+\.\d+\.\d+/)[0];
 
 export const CHART_COMPONENTS = {
   BarSeries: BarSeries,
@@ -78,8 +77,9 @@ export const ChartTypeCard = (props) => {
   const onChartTypeChange = (optionId) => {
     setToggleIdSelectd(optionId);
 
-    const chartType = toggleButtonsIcons.find(({ id }) => id === optionId)
-      .label;
+    const chartType = toggleButtonsIcons.find(
+      ({ id }) => id === optionId
+    ).label;
     props.onChange(chartType);
   };
 

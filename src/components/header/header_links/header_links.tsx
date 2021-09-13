@@ -27,11 +27,10 @@ import { EuiBreakpointSize } from '../../../services/breakpoint';
 import { EuiHideFor, EuiShowFor } from '../../responsive';
 
 type EuiHeaderLinksGutterSize = 'xs' | 's' | 'm' | 'l';
-type EuiHeaderLinksPopoverButtonProps = Partial<
-  EuiHeaderSectionItemButtonProps
-> & {
-  iconType?: IconType;
-};
+type EuiHeaderLinksPopoverButtonProps =
+  Partial<EuiHeaderSectionItemButtonProps> & {
+    iconType?: IconType;
+  };
 
 export type EuiHeaderLinksProps = CommonProps &
   HTMLAttributes<HTMLElement> & {
@@ -73,7 +72,11 @@ export const EuiHeaderLinks: FunctionComponent<EuiHeaderLinksProps> = ({
   popoverProps,
   ...rest
 }) => {
-  const { onClick: _onClick, iconType = 'apps', ...popoverButtonRest } = {
+  const {
+    onClick: _onClick,
+    iconType = 'apps',
+    ...popoverButtonRest
+  } = {
     ...popoverButtonProps,
   };
 

@@ -72,9 +72,10 @@ export const useDataGridColumnSelector = (
   );
 
   const { visibleColumns, setVisibleColumns } = columnVisibility;
-  const visibleColumnIds = useMemo(() => new Set(visibleColumns), [
-    visibleColumns,
-  ]);
+  const visibleColumnIds = useMemo(
+    () => new Set(visibleColumns),
+    [visibleColumns]
+  );
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -225,14 +226,14 @@ export const useDataGridColumnSelector = (
                                   const {
                                     target: { checked },
                                   } = event;
-                                  const nextVisibleColumns = sortedColumns.filter(
-                                    (columnId) =>
+                                  const nextVisibleColumns =
+                                    sortedColumns.filter((columnId) =>
                                       checked
                                         ? visibleColumnIds.has(columnId) ||
                                           id === columnId
                                         : visibleColumnIds.has(columnId) &&
                                           id !== columnId
-                                  );
+                                    );
                                   setVisibleColumns(nextVisibleColumns);
                                 }}
                               />

@@ -37,109 +37,100 @@ export type GuideSectionExampleTabsProps = {
   rightSideControl?: ReactNode;
 };
 
-export const GuideSectionExampleTabs: FunctionComponent<GuideSectionExampleTabsProps> = ({
-  tabs,
-  rightSideControl,
-}) => {
-  const [selectedTabId, setSelectedTabId] = useState('');
+export const GuideSectionExampleTabs: FunctionComponent<GuideSectionExampleTabsProps> =
+  ({ tabs, rightSideControl }) => {
+    const [selectedTabId, setSelectedTabId] = useState('');
 
-  const onSelectedTabChanged = (id: string) => {
-    if (id === selectedTabId) {
-      setSelectedTabId('');
-    } else {
-      setSelectedTabId(id);
-    }
-  };
+    const onSelectedTabChanged = (id: string) => {
+      if (id === selectedTabId) {
+        setSelectedTabId('');
+      } else {
+        setSelectedTabId(id);
+      }
+    };
 
-  const tabClasses = classNames('guideSectionTabs', {
-    'guideSectionTabs--open': selectedTabId,
-  });
+    const tabClasses = classNames('guideSectionTabs', {
+      'guideSectionTabs--open': selectedTabId,
+    });
 
-  const renderTabs = () => {
+    const renderTabs = () => {
+      return (
+        <EuiTabs size="s" display="condensed">
+          {tabs.map((tab, index) => {
+            const { displayName, code, type, name, props, snippets, ...rest } =
+              tab;
+
+            return (
+              <EuiTab
+                {...rest}
+                className="guideSectionTabs__tab"
+                name={name}
+                onClick={() => onSelectedTabChanged(name)}
+                isSelected={name === selectedTabId}
+                key={index}
+              >
+                {tab.displayName}
+              </EuiTab>
+            );
+          })}
+        </EuiTabs>
+      );
+    };
+
+    const renderContent = () => {
+      if (!selectedTabId) return null;
+
+      const selectedTab = tabs.find((tab) => tab.name === selectedTabId);
+
+      // SNIPPET
+      if (selectedTab && selectedTab.snippets) {
+        return (
+          <EuiErrorBoundary>
+            <EuiHorizontalRule margin="none" />
+            <GuideSectionSnippets snippets={selectedTab.snippets} />
+          </EuiErrorBoundary>
+        );
+        // SOURCE CODE BLOCK
+      } else if (selectedTab && selectedTab.code) {
+        return (
+          <EuiErrorBoundary>
+            <EuiHorizontalRule margin="none" />
+            <GuideSectionExampleCode
+              code={selectedTab.code}
+              type={selectedTab.type}
+            />
+          </EuiErrorBoundary>
+        );
+        // PROPS TABLE
+      } else if (selectedTab && selectedTab.props) {
+        const components = Object.keys(selectedTab.props);
+
+        return components.map((component) => (
+          <EuiErrorBoundary key={component}>
+            <EuiHorizontalRule margin="none" />
+            <GuideSectionPropsTable
+              key={component}
+              componentName={component}
+              component={selectedTab.props[component]}
+            />
+          </EuiErrorBoundary>
+        ));
+      }
+    };
+
     return (
-      <EuiTabs size="s" display="condensed">
-        {tabs.map((tab, index) => {
-          const {
-            displayName,
-            code,
-            type,
-            name,
-            props,
-            snippets,
-            ...rest
-          } = tab;
-
-          return (
-            <EuiTab
-              {...rest}
-              className="guideSectionTabs__tab"
-              name={name}
-              onClick={() => onSelectedTabChanged(name)}
-              isSelected={name === selectedTabId}
-              key={index}
-            >
-              {tab.displayName}
-            </EuiTab>
-          );
-        })}
-      </EuiTabs>
+      <>
+        <EuiFlexGroup
+          className={tabClasses}
+          responsive={false}
+          wrap
+          gutterSize="none"
+          alignItems="center"
+        >
+          <EuiFlexItem>{renderTabs()}</EuiFlexItem>
+          <EuiFlexItem grow={false}>{rightSideControl}</EuiFlexItem>
+        </EuiFlexGroup>
+        {selectedTabId && renderContent()}
+      </>
     );
   };
-
-  const renderContent = () => {
-    if (!selectedTabId) return null;
-
-    const selectedTab = tabs.find((tab) => tab.name === selectedTabId);
-
-    // SNIPPET
-    if (selectedTab && selectedTab.snippets) {
-      return (
-        <EuiErrorBoundary>
-          <EuiHorizontalRule margin="none" />
-          <GuideSectionSnippets snippets={selectedTab.snippets} />
-        </EuiErrorBoundary>
-      );
-      // SOURCE CODE BLOCK
-    } else if (selectedTab && selectedTab.code) {
-      return (
-        <EuiErrorBoundary>
-          <EuiHorizontalRule margin="none" />
-          <GuideSectionExampleCode
-            code={selectedTab.code}
-            type={selectedTab.type}
-          />
-        </EuiErrorBoundary>
-      );
-      // PROPS TABLE
-    } else if (selectedTab && selectedTab.props) {
-      const components = Object.keys(selectedTab.props);
-
-      return components.map((component) => (
-        <EuiErrorBoundary key={component}>
-          <EuiHorizontalRule margin="none" />
-          <GuideSectionPropsTable
-            key={component}
-            componentName={component}
-            component={selectedTab.props[component]}
-          />
-        </EuiErrorBoundary>
-      ));
-    }
-  };
-
-  return (
-    <>
-      <EuiFlexGroup
-        className={tabClasses}
-        responsive={false}
-        wrap
-        gutterSize="none"
-        alignItems="center"
-      >
-        <EuiFlexItem>{renderTabs()}</EuiFlexItem>
-        <EuiFlexItem grow={false}>{rightSideControl}</EuiFlexItem>
-      </EuiFlexGroup>
-      {selectedTabId && renderContent()}
-    </>
-  );
-};

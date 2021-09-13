@@ -231,9 +231,8 @@ function useColumnWidths(
       }, {});
   }, [columns]);
 
-  const [columnWidths, setColumnWidths] = useState<EuiDataGridColumnWidths>(
-    computeColumnWidths
-  );
+  const [columnWidths, setColumnWidths] =
+    useState<EuiDataGridColumnWidths>(computeColumnWidths);
 
   useEffect(() => {
     if (!hasMounted.current) {
@@ -278,9 +277,10 @@ function useInMemoryValues(
   const [inMemoryValuesVersion, setInMemoryValuesVersion] = useState(0);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  const inMemoryValues = useMemo(() => ({ ..._inMemoryValues.current }), [
-    inMemoryValuesVersion,
-  ]);
+  const inMemoryValues = useMemo(
+    () => ({ ..._inMemoryValues.current }),
+    [inMemoryValuesVersion]
+  );
 
   const onCellRender = useCallback((rowIndex, columnId, value) => {
     const nextInMemoryValues = _inMemoryValues.current;

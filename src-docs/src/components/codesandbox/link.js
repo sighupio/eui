@@ -28,8 +28,8 @@ const getVersion = (packageName) => {
  * */
 import { ThemeContext } from '../with_theme';
 
-const displayTogglesRawCode = require('!!raw-loader!../../views/form_controls/display_toggles')
-  .default;
+const displayTogglesRawCode =
+  require('!!raw-loader!../../views/form_controls/display_toggles').default;
 
 export const CodeSandboxLink = ({ ...rest }) => {
   return (

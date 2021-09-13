@@ -21,24 +21,24 @@ interface paletteItem {
   width: string;
 }
 
-export const EuiColorPaletteDisplayFixed: FunctionComponent<EuiColorPaletteDisplayFixedProps> = ({
-  palette,
-  ...rest
-}) => {
-  const fixedGradient = getFixedLinearGradient(palette);
+export const EuiColorPaletteDisplayFixed: FunctionComponent<EuiColorPaletteDisplayFixedProps> =
+  ({ palette, ...rest }) => {
+    const fixedGradient = getFixedLinearGradient(palette);
 
-  const paletteStops = fixedGradient.map((item: paletteItem, index: number) => (
-    <span
-      style={{ backgroundColor: item.color, width: item.width }}
-      key={`${item.color}-${index}`}
-    />
-  ));
+    const paletteStops = fixedGradient.map(
+      (item: paletteItem, index: number) => (
+        <span
+          style={{ backgroundColor: item.color, width: item.width }}
+          key={`${item.color}-${index}`}
+        />
+      )
+    );
 
-  return (
-    <span {...rest}>
-      <span className="euiColorPaletteDisplayFixed__bleedArea">
-        {paletteStops}
+    return (
+      <span {...rest}>
+        <span className="euiColorPaletteDisplayFixed__bleedArea">
+          {paletteStops}
+        </span>
       </span>
-    </span>
-  );
-};
+    );
+  };

@@ -676,9 +676,8 @@ export interface EuiDataGridPopoverContentProps {
    */
   cellContentsElement: HTMLDivElement;
 }
-export type EuiDataGridPopoverContent = ComponentType<
-  EuiDataGridPopoverContentProps
->;
+export type EuiDataGridPopoverContent =
+  ComponentType<EuiDataGridPopoverContentProps>;
 export interface EuiDataGridPopoverContents {
   [key: string]: EuiDataGridPopoverContent;
 }

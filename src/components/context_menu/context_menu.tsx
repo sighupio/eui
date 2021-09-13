@@ -227,9 +227,10 @@ export class EuiContextMenu extends Component<EuiContextMenuProps, State> {
       return;
     }
 
-    const nextPanelId = this.state.idAndItemIndexToPanelIdMap[
-      this.state.incomingPanelId!
-    ][itemIndex];
+    const nextPanelId =
+      this.state.idAndItemIndexToPanelIdMap[this.state.incomingPanelId!][
+        itemIndex
+      ];
 
     if (nextPanelId) {
       if (this.state.isUsingKeyboardToNavigate) {
@@ -246,9 +247,8 @@ export class EuiContextMenu extends Component<EuiContextMenuProps, State> {
   showPreviousPanel = () => {
     // If there's a previous panel, then we can close the current panel to go back to it.
     if (this.hasPreviousPanel(this.state.incomingPanelId!)) {
-      const previousPanelId = this.state.idToPreviousPanelIdMap[
-        this.state.incomingPanelId!
-      ];
+      const previousPanelId =
+        this.state.idToPreviousPanelIdMap[this.state.incomingPanelId!];
 
       // Set focus on the item which shows the panel we're leaving.
       const previousPanel = this.state.idToPanelMap[previousPanelId];

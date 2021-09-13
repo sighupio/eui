@@ -14,13 +14,14 @@ type GuideFigmaLinkProps = {
   context?: any;
 };
 
-export const GuideFigmaLink: React.FunctionComponent<GuideFigmaLinkProps> = () => {
-  return (
-    <ThemeContext.Consumer>
-      {(context) => <GuideFigmaLinkComponent context={context} />}
-    </ThemeContext.Consumer>
-  );
-};
+export const GuideFigmaLink: React.FunctionComponent<GuideFigmaLinkProps> =
+  () => {
+    return (
+      <ThemeContext.Consumer>
+        {(context) => <GuideFigmaLinkComponent context={context} />}
+      </ThemeContext.Consumer>
+    );
+  };
 
 // @ts-ignore Context has no type
 const GuideFigmaLinkComponent: React.FunctionComponent<GuideFigmaLinkProps> = ({

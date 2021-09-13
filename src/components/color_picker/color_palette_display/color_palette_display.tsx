@@ -58,34 +58,29 @@ export type EuiColorPaletteDisplayProps = {
   size?: EuiColorPaletteDisplaySize;
 } & ExclusiveUnion<DisplayFixed, DisplayGradient>;
 
-export const EuiColorPaletteDisplay: FunctionComponent<EuiColorPaletteDisplayProps> = ({
-  type = 'fixed',
-  palette,
-  className,
-  size = 's',
-  ...rest
-}) => {
-  const classes = classnames(
-    'euiColorPaletteDisplay',
-    className,
-    sizeToClassNameMap[size]
-  );
+export const EuiColorPaletteDisplay: FunctionComponent<EuiColorPaletteDisplayProps> =
+  ({ type = 'fixed', palette, className, size = 's', ...rest }) => {
+    const classes = classnames(
+      'euiColorPaletteDisplay',
+      className,
+      sizeToClassNameMap[size]
+    );
 
-  return (
-    <>
-      {type === 'fixed' ? (
-        <EuiColorPaletteDisplayFixed
-          className={classes}
-          palette={palette}
-          {...rest}
-        />
-      ) : (
-        <EuiColorPaletteDisplayGradient
-          className={classes}
-          palette={palette}
-          {...rest}
-        />
-      )}
-    </>
-  );
-};
+    return (
+      <>
+        {type === 'fixed' ? (
+          <EuiColorPaletteDisplayFixed
+            className={classes}
+            palette={palette}
+            {...rest}
+          />
+        ) : (
+          <EuiColorPaletteDisplayGradient
+            className={classes}
+            palette={palette}
+            {...rest}
+          />
+        )}
+      </>
+    );
+  };

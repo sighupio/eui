@@ -25,9 +25,8 @@ export const insertPositions: InsertPositionsMap = {
   before: 'beforebegin',
 };
 
-export const INSERT_POSITIONS: EuiPortalInsertPosition[] = keysOf(
-  insertPositions
-);
+export const INSERT_POSITIONS: EuiPortalInsertPosition[] =
+  keysOf(insertPositions);
 
 type EuiPortalInsertPosition = keyof typeof insertPositions;
 

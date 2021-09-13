@@ -34,110 +34,111 @@ export interface EuiDatePopoverContentProps {
   utcOffset?: number;
 }
 
-export const EuiDatePopoverContent: FunctionComponent<EuiDatePopoverContentProps> = ({
-  value,
-  roundUp = false,
-  onChange,
-  dateFormat,
-  timeFormat,
-  locale,
-  position,
-  utcOffset,
-}) => {
-  const onTabClick: EuiTabbedContentProps['onTabClick'] = (selectedTab) => {
-    switch (selectedTab.id) {
-      case DATE_MODES.ABSOLUTE:
-        onChange(toAbsoluteString(value, roundUp));
-        break;
-      case DATE_MODES.RELATIVE:
-        onChange(toRelativeString(value));
-        break;
-    }
-  };
+export const EuiDatePopoverContent: FunctionComponent<EuiDatePopoverContentProps> =
+  ({
+    value,
+    roundUp = false,
+    onChange,
+    dateFormat,
+    timeFormat,
+    locale,
+    position,
+    utcOffset,
+  }) => {
+    const onTabClick: EuiTabbedContentProps['onTabClick'] = (selectedTab) => {
+      switch (selectedTab.id) {
+        case DATE_MODES.ABSOLUTE:
+          onChange(toAbsoluteString(value, roundUp));
+          break;
+        case DATE_MODES.RELATIVE:
+          onChange(toRelativeString(value));
+          break;
+      }
+    };
 
-  const ariaLabel = `${position === 'start' ? 'Start' : 'End'} date:`;
+    const ariaLabel = `${position === 'start' ? 'Start' : 'End'} date:`;
 
-  const renderTabs = [
-    {
-      id: DATE_MODES.ABSOLUTE,
-      name: 'Absolute',
-      content: (
-        <EuiAbsoluteTab
-          dateFormat={dateFormat}
-          timeFormat={timeFormat}
-          locale={locale}
-          value={value}
-          onChange={onChange}
-          roundUp={roundUp}
-          position={position}
-          utcOffset={utcOffset}
-        />
-      ),
-      'data-test-subj': 'superDatePickerAbsoluteTab',
-      'aria-label': `${ariaLabel} Absolute`,
-    },
-    {
-      id: DATE_MODES.RELATIVE,
-      name: 'Relative',
-      content: (
-        <EuiRelativeTab
-          dateFormat={dateFormat}
-          locale={locale}
-          value={toAbsoluteString(value, roundUp)}
-          onChange={onChange}
-          roundUp={roundUp}
-          position={position}
-        />
-      ),
-      'data-test-subj': 'superDatePickerRelativeTab',
-      'aria-label': `${ariaLabel} Relative`,
-    },
-    {
-      id: DATE_MODES.NOW,
-      name: 'Now',
-      content: (
-        <EuiText
-          size="s"
-          color="subdued"
-          className="euiDatePopoverContent__padded--large"
-        >
-          <p>
-            Setting the time to &quot;now&quot; means that on every refresh this
-            time will be set to the time of the refresh.
-          </p>
-          <EuiButton
-            data-test-subj="superDatePickerNowButton"
-            onClick={() => {
-              onChange('now');
-            }}
-            fullWidth
+    const renderTabs = [
+      {
+        id: DATE_MODES.ABSOLUTE,
+        name: 'Absolute',
+        content: (
+          <EuiAbsoluteTab
+            dateFormat={dateFormat}
+            timeFormat={timeFormat}
+            locale={locale}
+            value={value}
+            onChange={onChange}
+            roundUp={roundUp}
+            position={position}
+            utcOffset={utcOffset}
+          />
+        ),
+        'data-test-subj': 'superDatePickerAbsoluteTab',
+        'aria-label': `${ariaLabel} Absolute`,
+      },
+      {
+        id: DATE_MODES.RELATIVE,
+        name: 'Relative',
+        content: (
+          <EuiRelativeTab
+            dateFormat={dateFormat}
+            locale={locale}
+            value={toAbsoluteString(value, roundUp)}
+            onChange={onChange}
+            roundUp={roundUp}
+            position={position}
+          />
+        ),
+        'data-test-subj': 'superDatePickerRelativeTab',
+        'aria-label': `${ariaLabel} Relative`,
+      },
+      {
+        id: DATE_MODES.NOW,
+        name: 'Now',
+        content: (
+          <EuiText
             size="s"
-            fill
+            color="subdued"
+            className="euiDatePopoverContent__padded--large"
           >
-            Set {position} date and time to now
-          </EuiButton>
-        </EuiText>
-      ),
-      'data-test-subj': 'superDatePickerNowTab',
-      'aria-label': `${ariaLabel} Now`,
-    },
-  ];
+            <p>
+              Setting the time to &quot;now&quot; means that on every refresh
+              this time will be set to the time of the refresh.
+            </p>
+            <EuiButton
+              data-test-subj="superDatePickerNowButton"
+              onClick={() => {
+                onChange('now');
+              }}
+              fullWidth
+              size="s"
+              fill
+            >
+              Set {position} date and time to now
+            </EuiButton>
+          </EuiText>
+        ),
+        'data-test-subj': 'superDatePickerNowTab',
+        'aria-label': `${ariaLabel} Now`,
+      },
+    ];
 
-  const initialSelectedTab = renderTabs.find(
-    (tab) => tab.id === getDateMode(value)
-  );
+    const initialSelectedTab = renderTabs.find(
+      (tab) => tab.id === getDateMode(value)
+    );
 
-  return (
-    <EuiTabbedContent
-      className="euiDatePopoverContent"
-      tabs={renderTabs}
-      autoFocus="selected"
-      initialSelectedTab={initialSelectedTab}
-      onTabClick={onTabClick}
-      size="s"
-      expand
-    />
-  );
-};
+    return (
+      <EuiTabbedContent
+        className="euiDatePopoverContent"
+        tabs={renderTabs}
+        autoFocus="selected"
+        initialSelectedTab={initialSelectedTab}
+        onTabClick={onTabClick}
+        size="s"
+        expand
+      />
+    );
+  };
 
 EuiDatePopoverContent.displayName = 'EuiDatePopoverContent';

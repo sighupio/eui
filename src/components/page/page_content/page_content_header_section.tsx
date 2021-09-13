@@ -14,16 +14,13 @@ export interface EuiPageContentHeaderSectionProps
   extends CommonProps,
     HTMLAttributes<HTMLDivElement> {}
 
-export const EuiPageContentHeaderSection: FunctionComponent<EuiPageContentHeaderSectionProps> = ({
-  children,
-  className,
-  ...rest
-}) => {
-  const classes = classNames('euiPageContentHeaderSection', className);
+export const EuiPageContentHeaderSection: FunctionComponent<EuiPageContentHeaderSectionProps> =
+  ({ children, className, ...rest }) => {
+    const classes = classNames('euiPageContentHeaderSection', className);
 
-  return (
-    <div className={classes} {...rest}>
-      {children}
-    </div>
-  );
-};
+    return (
+      <div className={classes} {...rest}>
+        {children}
+      </div>
+    );
+  };

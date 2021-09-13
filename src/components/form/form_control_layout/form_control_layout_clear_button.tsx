@@ -25,37 +25,33 @@ export type EuiFormControlLayoutClearButtonProps = CommonProps &
     size?: typeof SIZES[number];
   };
 
-export const EuiFormControlLayoutClearButton: FunctionComponent<EuiFormControlLayoutClearButtonProps> = ({
-  className,
-  onClick,
-  size = 'm',
-  ...rest
-}) => {
-  const classes = classNames(
-    'euiFormControlLayoutClearButton',
-    sizeToClassNameMap[size],
-    className
-  );
+export const EuiFormControlLayoutClearButton: FunctionComponent<EuiFormControlLayoutClearButtonProps> =
+  ({ className, onClick, size = 'm', ...rest }) => {
+    const classes = classNames(
+      'euiFormControlLayoutClearButton',
+      sizeToClassNameMap[size],
+      className
+    );
 
-  return (
-    <EuiI18n
-      token="euiFormControlLayoutClearButton.label"
-      default="Clear input"
-    >
-      {(label: string) => (
-        <button
-          type="button"
-          className={classes}
-          onClick={onClick}
-          aria-label={label}
-          {...rest}
-        >
-          <EuiIcon
-            className="euiFormControlLayoutClearButton__icon"
-            type="cross"
-          />
-        </button>
-      )}
-    </EuiI18n>
-  );
-};
+    return (
+      <EuiI18n
+        token="euiFormControlLayoutClearButton.label"
+        default="Clear input"
+      >
+        {(label: string) => (
+          <button
+            type="button"
+            className={classes}
+            onClick={onClick}
+            aria-label={label}
+            {...rest}
+          >
+            <EuiIcon
+              className="euiFormControlLayoutClearButton__icon"
+              type="cross"
+            />
+          </button>
+        )}
+      </EuiI18n>
+    );
+  };

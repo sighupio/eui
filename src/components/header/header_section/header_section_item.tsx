@@ -31,21 +31,17 @@ export type EuiHeaderSectionItemProps = CommonProps & {
   children?: ReactNode;
 };
 
-export const EuiHeaderSectionItem: FunctionComponent<EuiHeaderSectionItemProps> = ({
-  border = 'left',
-  children,
-  className,
-  ...rest
-}) => {
-  const classes = classNames(
-    'euiHeaderSectionItem',
-    borderToClassNameMap[border],
-    className
-  );
+export const EuiHeaderSectionItem: FunctionComponent<EuiHeaderSectionItemProps> =
+  ({ border = 'left', children, className, ...rest }) => {
+    const classes = classNames(
+      'euiHeaderSectionItem',
+      borderToClassNameMap[border],
+      className
+    );
 
-  return (
-    <div className={classes} {...rest}>
-      {children}
-    </div>
-  );
-};
+    return (
+      <div className={classes} {...rest}>
+        {children}
+      </div>
+    );
+  };

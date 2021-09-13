@@ -38,51 +38,52 @@ export type EuiResizableCollapseButtonProps = Omit<
   isCollapsed?: boolean;
 };
 
-export const EuiResizableCollapseButton: FunctionComponent<EuiResizableCollapseButtonProps> = ({
-  className,
-  externalPosition,
-  internalPosition = 'middle',
-  direction = 'horizontal',
-  isVisible,
-  isCollapsed,
-  ...rest
-}) => {
-  const isHorizontal = direction === 'horizontal';
+export const EuiResizableCollapseButton: FunctionComponent<EuiResizableCollapseButtonProps> =
+  ({
+    className,
+    externalPosition,
+    internalPosition = 'middle',
+    direction = 'horizontal',
+    isVisible,
+    isCollapsed,
+    ...rest
+  }) => {
+    const isHorizontal = direction === 'horizontal';
 
-  const classes = classNames(
-    'euiResizableToggleButton',
-    `euiResizableToggleButton--${direction}`,
-    `euiResizableToggleButton--${externalPosition}`,
-    `euiResizableToggleButton--${internalPosition}`,
-    {
-      'euiResizableToggleButton-isVisible': isVisible,
-      'euiResizableToggleButton-isCollapsed': isCollapsed,
-    },
-    className
-  );
+    const classes = classNames(
+      'euiResizableToggleButton',
+      `euiResizableToggleButton--${direction}`,
+      `euiResizableToggleButton--${externalPosition}`,
+      `euiResizableToggleButton--${internalPosition}`,
+      {
+        'euiResizableToggleButton-isVisible': isVisible,
+        'euiResizableToggleButton-isCollapsed': isCollapsed,
+      },
+      className
+    );
 
-  // Default to simiple grab icon in case there is no externalPosition specified
-  let COLLAPSED_ICON = isHorizontal ? 'grab' : 'grabHorizontal';
-  let NOT_COLLAPSED_ICON = isHorizontal ? 'grab' : 'grabHorizontal';
+    // Default to simiple grab icon in case there is no externalPosition specified
+    let COLLAPSED_ICON = isHorizontal ? 'grab' : 'grabHorizontal';
+    let NOT_COLLAPSED_ICON = isHorizontal ? 'grab' : 'grabHorizontal';
 
-  switch (externalPosition) {
-    case 'before':
-      COLLAPSED_ICON = isHorizontal ? 'menuLeft' : 'menuUp';
-      NOT_COLLAPSED_ICON = isHorizontal ? 'menuRight' : 'menuDown';
-      break;
-    case 'after':
-      COLLAPSED_ICON = isHorizontal ? 'menuRight' : 'menuDown';
-      NOT_COLLAPSED_ICON = isHorizontal ? 'menuLeft' : 'menuUp';
-      break;
-  }
+    switch (externalPosition) {
+      case 'before':
+        COLLAPSED_ICON = isHorizontal ? 'menuLeft' : 'menuUp';
+        NOT_COLLAPSED_ICON = isHorizontal ? 'menuRight' : 'menuDown';
+        break;
+      case 'after':
+        COLLAPSED_ICON = isHorizontal ? 'menuRight' : 'menuDown';
+        NOT_COLLAPSED_ICON = isHorizontal ? 'menuLeft' : 'menuUp';
+        break;
+    }
 
-  return (
-    <EuiButtonIcon
-      display={isCollapsed ? 'empty' : 'fill'}
-      color={isCollapsed ? 'text' : 'ghost'}
-      {...rest}
-      className={classes}
-      iconType={isCollapsed ? COLLAPSED_ICON : NOT_COLLAPSED_ICON}
-    />
-  );
-};
+    return (
+      <EuiButtonIcon
+        display={isCollapsed ? 'empty' : 'fill'}
+        color={isCollapsed ? 'text' : 'ghost'}
+        {...rest}
+        className={classes}
+        iconType={isCollapsed ? COLLAPSED_ICON : NOT_COLLAPSED_ICON}
+      />
+    );
+  };

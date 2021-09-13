@@ -105,212 +105,213 @@ export type EuiPageHeaderContentProps = CommonProps &
     children?: ReactNode;
   };
 
-export const EuiPageHeaderContent: FunctionComponent<EuiPageHeaderContentProps> = ({
-  className,
-  pageTitle,
-  pageTitleProps,
-  iconType,
-  iconProps,
-  tabs,
-  tabsProps,
-  description,
-  alignItems = 'top',
-  responsive = true,
-  rightSideItems,
-  rightSideGroupProps,
-  children,
-  ...rest
-}) => {
-  const isResponsiveBreakpoint = useIsWithinBreakpoints(
-    ['xs', 's'],
-    !!responsive
-  );
+export const EuiPageHeaderContent: FunctionComponent<EuiPageHeaderContentProps> =
+  ({
+    className,
+    pageTitle,
+    pageTitleProps,
+    iconType,
+    iconProps,
+    tabs,
+    tabsProps,
+    description,
+    alignItems = 'top',
+    responsive = true,
+    rightSideItems,
+    rightSideGroupProps,
+    children,
+    ...rest
+  }) => {
+    const isResponsiveBreakpoint = useIsWithinBreakpoints(
+      ['xs', 's'],
+      !!responsive
+    );
 
-  const classes = classNames('euiPageHeaderContent');
+    const classes = classNames('euiPageHeaderContent');
 
-  let descriptionNode;
-  if (description) {
-    descriptionNode = (
+    let descriptionNode;
+    if (description) {
+      descriptionNode = (
+        <>
+          {(pageTitle || tabs) && <EuiSpacer />}
+          <EuiText grow={false}>
+            <p>{description}</p>
+          </EuiText>
+        </>
+      );
+    }
+
+    let pageTitleNode;
+    if (pageTitle) {
+      const icon = iconType ? (
+        <EuiIcon
+          size="xl"
+          {...iconProps}
+          type={iconType}
+          className={classNames(
+            'euiPageHeaderContent__titleIcon',
+            iconProps?.className
+          )}
+        />
+      ) : undefined;
+
+      pageTitleNode = (
+        <EuiTitle {...pageTitleProps} size="l">
+          <h1>
+            {icon}
+            {pageTitle}
+          </h1>
+        </EuiTitle>
+      );
+    }
+
+    let tabsNode;
+    if (tabs) {
+      const tabsSize: EuiTabsProps['size'] = pageTitle ? 'l' : 'xl';
+
+      const renderTabs = () => {
+        return tabs.map((tab, index) => {
+          const { label, ...tabRest } = tab;
+          return (
+            <EuiTab key={index} {...tabRest}>
+              {label}
+            </EuiTab>
+          );
+        });
+      };
+
+      // When tabs exist without a pageTitle, we need to recreate an h1 based on the currently selected tab and visually hide it
+      const screenReaderPageTitle = !pageTitle && (
+        <EuiScreenReaderOnly>
+          <h1>
+            {
+              tabs.find((obj) => {
+                return obj.isSelected === true;
+              })?.label
+            }
+          </h1>
+        </EuiScreenReaderOnly>
+      );
+
+      tabsNode = (
+        <>
+          {pageTitleNode && <EuiSpacer />}
+          {screenReaderPageTitle}
+          <EuiTabs
+            {...tabsProps}
+            display="condensed"
+            bottomBorder={false}
+            size={tabsSize}
+          >
+            {renderTabs()}
+          </EuiTabs>
+        </>
+      );
+    }
+
+    const childrenNode = children && (
       <>
-        {(pageTitle || tabs) && <EuiSpacer />}
-        <EuiText grow={false}>
-          <p>{description}</p>
-        </EuiText>
+        <EuiSpacer />
+        {children}
       </>
     );
-  }
 
-  let pageTitleNode;
-  if (pageTitle) {
-    const icon = iconType ? (
-      <EuiIcon
-        size="xl"
-        {...iconProps}
-        type={iconType}
-        className={classNames(
-          'euiPageHeaderContent__titleIcon',
-          iconProps?.className
-        )}
-      />
-    ) : undefined;
+    let bottomContentNode;
+    if (childrenNode || (tabsNode && pageTitleNode)) {
+      bottomContentNode = (
+        <div className="euiPageHeaderContent__bottom">
+          {childrenNode}
+          {pageTitleNode && tabsNode}
+        </div>
+      );
+    }
 
-    pageTitleNode = (
-      <EuiTitle {...pageTitleProps} size="l">
-        <h1>
-          {icon}
-          {pageTitle}
-        </h1>
-      </EuiTitle>
-    );
-  }
+    /**
+     * The left side order depends on if a `pageTitle` was supplied.
+     * If not, but there are `tabs`, then the tabs become the page title
+     */
+    let leftSideOrder;
+    if (tabsNode && !pageTitleNode) {
+      leftSideOrder = (
+        <>
+          {tabsNode}
+          {descriptionNode}
+        </>
+      );
+    } else {
+      leftSideOrder = (
+        <>
+          {pageTitleNode}
+          {descriptionNode}
+        </>
+      );
+    }
 
-  let tabsNode;
-  if (tabs) {
-    const tabsSize: EuiTabsProps['size'] = pageTitle ? 'l' : 'xl';
+    let rightSideFlexItem;
+    if (rightSideItems && rightSideItems.length) {
+      const wrapWithFlex = () => {
+        return rightSideItems.map((item, index) => {
+          return (
+            <EuiFlexItem grow={false} key={index}>
+              {item}
+            </EuiFlexItem>
+          );
+        });
+      };
 
-    const renderTabs = () => {
-      return tabs.map((tab, index) => {
-        const { label, ...tabRest } = tab;
-        return (
-          <EuiTab key={index} {...tabRest}>
-            {label}
-          </EuiTab>
-        );
-      });
-    };
+      rightSideFlexItem = (
+        <EuiFlexItem grow={false}>
+          <EuiFlexGroup
+            wrap
+            responsive={false}
+            {...rightSideGroupProps}
+            className={classNames(
+              'euiPageHeaderContent__rightSideItems',
+              rightSideGroupProps?.className
+            )}
+          >
+            {wrapWithFlex()}
+          </EuiFlexGroup>
+        </EuiFlexItem>
+      );
+    }
 
-    // When tabs exist without a pageTitle, we need to recreate an h1 based on the currently selected tab and visually hide it
-    const screenReaderPageTitle = !pageTitle && (
-      <EuiScreenReaderOnly>
-        <h1>
-          {
-            tabs.find((obj) => {
-              return obj.isSelected === true;
-            })?.label
-          }
-        </h1>
-      </EuiScreenReaderOnly>
-    );
-
-    tabsNode = (
-      <>
-        {pageTitleNode && <EuiSpacer />}
-        {screenReaderPageTitle}
-        <EuiTabs
-          {...tabsProps}
-          display="condensed"
-          bottomBorder={false}
-          size={tabsSize}
+    return alignItems === 'top' || isResponsiveBreakpoint ? (
+      <div className={classes} {...rest}>
+        <EuiFlexGroup
+          responsive={!!responsive}
+          className="euiPageHeaderContent__top"
+          alignItems={pageTitle ? 'flexStart' : 'baseline'}
+          gutterSize="l"
         >
-          {renderTabs()}
-        </EuiTabs>
-      </>
-    );
-  }
-
-  const childrenNode = children && (
-    <>
-      <EuiSpacer />
-      {children}
-    </>
-  );
-
-  let bottomContentNode;
-  if (childrenNode || (tabsNode && pageTitleNode)) {
-    bottomContentNode = (
-      <div className="euiPageHeaderContent__bottom">
-        {childrenNode}
-        {pageTitleNode && tabsNode}
+          {isResponsiveBreakpoint && responsive === 'reverse' ? (
+            <>
+              {rightSideFlexItem}
+              <EuiFlexItem>{leftSideOrder}</EuiFlexItem>
+            </>
+          ) : (
+            <>
+              <EuiFlexItem>{leftSideOrder}</EuiFlexItem>
+              {rightSideFlexItem}
+            </>
+          )}
+        </EuiFlexGroup>
+        {bottomContentNode}
+      </div>
+    ) : (
+      <div className={classes} {...rest}>
+        <EuiFlexGroup
+          responsive={!!responsive}
+          className="euiPageHeaderContent__top"
+          alignItems={alignItems === 'bottom' ? 'flexEnd' : alignItems}
+          gutterSize="l"
+        >
+          <EuiFlexItem>
+            {leftSideOrder}
+            {bottomContentNode}
+          </EuiFlexItem>
+          {rightSideFlexItem}
+        </EuiFlexGroup>
       </div>
     );
-  }
-
-  /**
-   * The left side order depends on if a `pageTitle` was supplied.
-   * If not, but there are `tabs`, then the tabs become the page title
-   */
-  let leftSideOrder;
-  if (tabsNode && !pageTitleNode) {
-    leftSideOrder = (
-      <>
-        {tabsNode}
-        {descriptionNode}
-      </>
-    );
-  } else {
-    leftSideOrder = (
-      <>
-        {pageTitleNode}
-        {descriptionNode}
-      </>
-    );
-  }
-
-  let rightSideFlexItem;
-  if (rightSideItems && rightSideItems.length) {
-    const wrapWithFlex = () => {
-      return rightSideItems.map((item, index) => {
-        return (
-          <EuiFlexItem grow={false} key={index}>
-            {item}
-          </EuiFlexItem>
-        );
-      });
-    };
-
-    rightSideFlexItem = (
-      <EuiFlexItem grow={false}>
-        <EuiFlexGroup
-          wrap
-          responsive={false}
-          {...rightSideGroupProps}
-          className={classNames(
-            'euiPageHeaderContent__rightSideItems',
-            rightSideGroupProps?.className
-          )}
-        >
-          {wrapWithFlex()}
-        </EuiFlexGroup>
-      </EuiFlexItem>
-    );
-  }
-
-  return alignItems === 'top' || isResponsiveBreakpoint ? (
-    <div className={classes} {...rest}>
-      <EuiFlexGroup
-        responsive={!!responsive}
-        className="euiPageHeaderContent__top"
-        alignItems={pageTitle ? 'flexStart' : 'baseline'}
-        gutterSize="l"
-      >
-        {isResponsiveBreakpoint && responsive === 'reverse' ? (
-          <>
-            {rightSideFlexItem}
-            <EuiFlexItem>{leftSideOrder}</EuiFlexItem>
-          </>
-        ) : (
-          <>
-            <EuiFlexItem>{leftSideOrder}</EuiFlexItem>
-            {rightSideFlexItem}
-          </>
-        )}
-      </EuiFlexGroup>
-      {bottomContentNode}
-    </div>
-  ) : (
-    <div className={classes} {...rest}>
-      <EuiFlexGroup
-        responsive={!!responsive}
-        className="euiPageHeaderContent__top"
-        alignItems={alignItems === 'bottom' ? 'flexEnd' : alignItems}
-        gutterSize="l"
-      >
-        <EuiFlexItem>
-          {leftSideOrder}
-          {bottomContentNode}
-        </EuiFlexItem>
-        {rightSideFlexItem}
-      </EuiFlexGroup>
-    </div>
-  );
-};
+  };

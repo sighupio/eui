@@ -12,41 +12,39 @@ export type GuideSectionExampleCode = {
   type?: string;
 };
 
-export const GuideSectionExampleCode: FunctionComponent<GuideSectionExampleCode> = ({
-  code,
-  type = GuideSectionTypes.JS,
-}) => {
-  const [codeToRender, setCodeToRender] = useState();
+export const GuideSectionExampleCode: FunctionComponent<GuideSectionExampleCode> =
+  ({ code, type = GuideSectionTypes.JS }) => {
+    const [codeToRender, setCodeToRender] = useState();
 
-  useEffect(() => {
-    setCodeToRender(renderJsSourceCode(code));
-    return () => {
-      setCodeToRender(undefined);
-    };
-  }, [code]);
+    useEffect(() => {
+      setCodeToRender(renderJsSourceCode(code));
+      return () => {
+        setCodeToRender(undefined);
+      };
+    }, [code]);
 
-  const codeSandboxLink = (
-    <CodeSandboxLink
-      className="guideSectionExampleCode__link"
-      content={code.default}
-      type={type.toLowerCase()}
-    >
-      <EuiButtonEmpty size="xs" iconType="logoCodesandbox">
-        Try out this demo on Code Sandbox
-      </EuiButtonEmpty>
-    </CodeSandboxLink>
-  );
-
-  return (
-    <>
-      <EuiCodeBlock
-        language={type === GuideSectionTypes.JS ? 'jsx' : type.toLowerCase()}
-        overflowHeight={400}
-        isCopyable
+    const codeSandboxLink = (
+      <CodeSandboxLink
+        className="guideSectionExampleCode__link"
+        content={code.default}
+        type={type.toLowerCase()}
       >
-        {codeToRender}
-      </EuiCodeBlock>
-      {codeSandboxLink}
-    </>
-  );
-};
+        <EuiButtonEmpty size="xs" iconType="logoCodesandbox">
+          Try out this demo on Code Sandbox
+        </EuiButtonEmpty>
+      </CodeSandboxLink>
+    );
+
+    return (
+      <>
+        <EuiCodeBlock
+          language={type === GuideSectionTypes.JS ? 'jsx' : type.toLowerCase()}
+          overflowHeight={400}
+          isCopyable
+        >
+          {codeToRender}
+        </EuiCodeBlock>
+        {codeSandboxLink}
+      </>
+    );
+  };

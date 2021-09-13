@@ -20,23 +20,19 @@ export interface EuiPageContentHeaderProps
   responsive?: boolean;
 }
 
-export const EuiPageContentHeader: FunctionComponent<EuiPageContentHeaderProps> = ({
-  children,
-  className,
-  responsive = true,
-  ...rest
-}) => {
-  const classes = classNames(
-    'euiPageContentHeader',
-    {
-      'euiPageContentHeader--responsive': responsive,
-    },
-    className
-  );
+export const EuiPageContentHeader: FunctionComponent<EuiPageContentHeaderProps> =
+  ({ children, className, responsive = true, ...rest }) => {
+    const classes = classNames(
+      'euiPageContentHeader',
+      {
+        'euiPageContentHeader--responsive': responsive,
+      },
+      className
+    );
 
-  return (
-    <div className={classes} {...rest}>
-      {children}
-    </div>
-  );
-};
+    return (
+      <div className={classes} {...rest}>
+        {children}
+      </div>
+    );
+  };

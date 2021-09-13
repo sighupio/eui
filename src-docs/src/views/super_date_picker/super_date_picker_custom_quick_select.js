@@ -22,9 +22,8 @@ export default () => {
   const [isLoading, setIsLoading] = useState(false);
   const [start, setStart] = useState('now-30m');
   const [end, setEnd] = useState('now');
-  const [showCustomQuickSelectPanel, setShowCustomQuickSelectPanel] = useState(
-    true
-  );
+  const [showCustomQuickSelectPanel, setShowCustomQuickSelectPanel] =
+    useState(true);
   const [isPaused, setIsPaused] = useState(true);
   const [refreshInterval, setRefreshInterval] = useState();
 

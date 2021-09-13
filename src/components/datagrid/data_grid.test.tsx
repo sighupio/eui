@@ -83,9 +83,9 @@ function extractGridData(datagrid: ReactWrapper<EuiDataGridProps>) {
 }
 
 function extractRowHeights(datagrid: ReactWrapper) {
-  return (findTestSubject(datagrid, 'dataGridRowCell') as ReactWrapper<
-    any
-  >).reduce((heights: { [key: string]: number }, cell) => {
+  return (
+    findTestSubject(datagrid, 'dataGridRowCell') as ReactWrapper<any>
+  ).reduce((heights: { [key: string]: number }, cell) => {
     const cellProps = cell.props();
     const cellContentProps = cell
       .find('[data-test-subj="cell-content"]')
@@ -96,9 +96,9 @@ function extractRowHeights(datagrid: ReactWrapper) {
 }
 
 function extractColumnWidths(datagrid: ReactWrapper) {
-  return (findTestSubject(datagrid, 'dataGridHeaderCell', '|=') as ReactWrapper<
-    any
-  >).reduce((widths: { [key: string]: number }, cell) => {
+  return (
+    findTestSubject(datagrid, 'dataGridHeaderCell', '|=') as ReactWrapper<any>
+  ).reduce((widths: { [key: string]: number }, cell) => {
     const [, columnId] = cell
       .props()
       ['data-test-subj'].match(/dataGridHeaderCell-(.*)/);
@@ -214,9 +214,11 @@ function getColumnSortDirection(
     'label[className*="euiButtonGroupButton-isSelected"]'
   );
 
-  const sortDirection = (activeSort.props() as {
-    'data-test-subj': string;
-  })['data-test-subj'].match(/(?<direction>[^-]+)$/)!.groups!.direction;
+  const sortDirection = (
+    activeSort.props() as {
+      'data-test-subj': string;
+    }
+  )['data-test-subj'].match(/(?<direction>[^-]+)$/)!.groups!.direction;
 
   return [columnSorter, sortDirection];
 }
@@ -1099,8 +1101,8 @@ describe('EuiDataGrid', () => {
         expect(component.props().pagination.onChangePage).toHaveBeenCalledTimes(
           1
         );
-        const firstCallPageIndex = component.props().pagination.onChangePage
-          .mock.calls[0][0];
+        const firstCallPageIndex =
+          component.props().pagination.onChangePage.mock.calls[0][0];
         expect(firstCallPageIndex).toBe(1);
 
         expect(extractGridData(component)).toEqual([
@@ -1115,8 +1117,8 @@ describe('EuiDataGrid', () => {
         expect(component.props().pagination.onChangePage).toHaveBeenCalledTimes(
           2
         );
-        const secondCallPageIndex = component.props().pagination.onChangePage
-          .mock.calls[1][0];
+        const secondCallPageIndex =
+          component.props().pagination.onChangePage.mock.calls[1][0];
         expect(secondCallPageIndex).toBe(2);
 
         expect(extractGridData(component)).toEqual([['Column'], ['6'], ['7']]);
@@ -1161,8 +1163,8 @@ describe('EuiDataGrid', () => {
         expect(component.props().pagination.onChangePage).toHaveBeenCalledTimes(
           1
         );
-        const firstCallPageIndex = component.props().pagination.onChangePage
-          .mock.calls[0][0];
+        const firstCallPageIndex =
+          component.props().pagination.onChangePage.mock.calls[0][0];
         expect(firstCallPageIndex).toBe(2);
 
         expect(extractGridData(component)).toEqual([['Column'], ['6'], ['7']]);
@@ -1173,8 +1175,8 @@ describe('EuiDataGrid', () => {
         expect(component.props().pagination.onChangePage).toHaveBeenCalledTimes(
           2
         );
-        const secondCallPageIndex = component.props().pagination.onChangePage
-          .mock.calls[1][0];
+        const secondCallPageIndex =
+          component.props().pagination.onChangePage.mock.calls[1][0];
         expect(secondCallPageIndex).toBe(1);
 
         expect(extractGridData(component)).toEqual([
@@ -1222,9 +1224,8 @@ describe('EuiDataGrid', () => {
       findTestSubject(component, 'tablePaginationPopoverButton').simulate(
         'click'
       );
-      const rowButtons: NodeListOf<HTMLButtonElement> = document.body.querySelectorAll(
-        '.euiContextMenuItem'
-      );
+      const rowButtons: NodeListOf<HTMLButtonElement> =
+        document.body.querySelectorAll('.euiContextMenuItem');
       expect(
         Array.prototype.map.call(
           rowButtons,
@@ -1236,8 +1237,8 @@ describe('EuiDataGrid', () => {
       expect(
         component.props().pagination.onChangeItemsPerPage
       ).toHaveBeenCalledTimes(1);
-      const firstCallPageIndex = component.props().pagination
-        .onChangeItemsPerPage.mock.calls[0][0];
+      const firstCallPageIndex =
+        component.props().pagination.onChangeItemsPerPage.mock.calls[0][0];
       expect(firstCallPageIndex).toBe(6);
 
       expect(extractGridData(component)).toEqual([

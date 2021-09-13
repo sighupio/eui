@@ -269,9 +269,8 @@ export class EuiComboBox<T> extends Component<
     this.listRefInstance = ref;
   };
 
-  toggleButtonRefInstance: RefInstance<
-    HTMLButtonElement | HTMLSpanElement
-  > = null;
+  toggleButtonRefInstance: RefInstance<HTMLButtonElement | HTMLSpanElement> =
+    null;
   toggleButtonRefCallback: RefCallback<HTMLButtonElement | HTMLSpanElement> = (
     ref
   ) => {
@@ -437,12 +436,8 @@ export class EuiComboBox<T> extends Component<
   };
 
   addCustomOption = (isContainerBlur: boolean, searchValue: string) => {
-    const {
-      onCreateOption,
-      options,
-      selectedOptions,
-      singleSelection,
-    } = this.props;
+    const { onCreateOption, options, selectedOptions, singleSelection } =
+      this.props;
 
     const { matchingOptions } = this.state;
 
@@ -567,9 +562,7 @@ export class EuiComboBox<T> extends Component<
       this.closeList();
 
       if (this.props.onBlur) {
-        this.props.onBlur(
-          (event as unknown) as React.FocusEvent<HTMLDivElement>
-        );
+        this.props.onBlur(event as unknown as React.FocusEvent<HTMLDivElement>);
       }
       this.setState({ hasFocus: false });
 
@@ -793,12 +786,8 @@ export class EuiComboBox<T> extends Component<
     nextProps: _EuiComboBoxProps<T>,
     prevState: EuiComboBoxState<T>
   ) {
-    const {
-      options,
-      selectedOptions,
-      singleSelection,
-      sortMatchesBy,
-    } = nextProps;
+    const { options, selectedOptions, singleSelection, sortMatchesBy } =
+      nextProps;
     const { activeOptionIndex, searchValue } = prevState;
 
     // Calculate and cache the options which match the searchValue, because we use this information
@@ -867,12 +856,8 @@ export class EuiComboBox<T> extends Component<
   };
 
   componentDidUpdate() {
-    const {
-      options,
-      selectedOptions,
-      singleSelection,
-      sortMatchesBy,
-    } = this.props;
+    const { options, selectedOptions, singleSelection, sortMatchesBy } =
+      this.props;
     const { searchValue } = this.state;
 
     // React 16.3 has a bug (fixed in 16.4) where getDerivedStateFromProps

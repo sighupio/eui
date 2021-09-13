@@ -78,16 +78,16 @@ export const border: EuiThemeBorder = {
     medium: computed(sizeToPixel(0.25)),
     small: computed(sizeToPixel(0.125)),
   },
-  thin: computed(([width, color]) => `${width.thin} solid ${color}`, [
-    'border.width',
-    'border.color',
-  ]),
-  thick: computed(([width, color]) => `${width.thick} solid ${color}`, [
-    'border.width',
-    'border.color',
-  ]),
-  editable: computed(([width, color]) => `${width.thick} dotted ${color}`, [
-    'border.width',
-    'border.color',
-  ]),
+  thin: computed(
+    ([width, color]) => `${width.thin} solid ${color}`,
+    ['border.width', 'border.color']
+  ),
+  thick: computed(
+    ([width, color]) => `${width.thick} solid ${color}`,
+    ['border.width', 'border.color']
+  ),
+  editable: computed(
+    ([width, color]) => `${width.thick} dotted ${color}`,
+    ['border.width', 'border.color']
+  ),
 };

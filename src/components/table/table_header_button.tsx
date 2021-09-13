@@ -18,39 +18,35 @@ export type EuiTableHeaderButtonProps = CommonProps &
     iconType?: IconType;
   };
 
-export const EuiTableHeaderButton: FunctionComponent<EuiTableHeaderButtonProps> = ({
-  children,
-  className,
-  iconType,
-  ...rest
-}) => {
-  const classes = classNames('euiTableHeaderButton', className);
+export const EuiTableHeaderButton: FunctionComponent<EuiTableHeaderButtonProps> =
+  ({ children, className, iconType, ...rest }) => {
+    const classes = classNames('euiTableHeaderButton', className);
 
-  // Add an icon to the button if one exists.
-  let buttonIcon;
+    // Add an icon to the button if one exists.
+    let buttonIcon;
 
-  if (iconType) {
-    buttonIcon = (
-      <EuiIcon
-        className="euiTableHeaderButton__icon"
-        type={iconType}
-        size="m"
-        aria-hidden="true"
-      />
+    if (iconType) {
+      buttonIcon = (
+        <EuiIcon
+          className="euiTableHeaderButton__icon"
+          type={iconType}
+          size="m"
+          aria-hidden="true"
+        />
+      );
+    }
+
+    return (
+      <button type="button" className={classes} {...rest}>
+        <EuiInnerText>
+          {(ref, innerText) => (
+            <span title={innerText} ref={ref}>
+              {children}
+            </span>
+          )}
+        </EuiInnerText>
+
+        {buttonIcon}
+      </button>
     );
-  }
-
-  return (
-    <button type="button" className={classes} {...rest}>
-      <EuiInnerText>
-        {(ref, innerText) => (
-          <span title={innerText} ref={ref}>
-            {children}
-          </span>
-        )}
-      </EuiInnerText>
-
-      {buttonIcon}
-    </button>
-  );
-};
+  };

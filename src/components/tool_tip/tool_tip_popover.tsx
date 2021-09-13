@@ -48,14 +48,8 @@ export class EuiToolTipPopover extends Component<Props> {
   }
 
   render() {
-    const {
-      children,
-      title,
-      className,
-      positionToolTip,
-      popoverRef,
-      ...rest
-    } = this.props;
+    const { children, title, className, positionToolTip, popoverRef, ...rest } =
+      this.props;
 
     const classes = classNames('euiToolTipPopover', className);
 

@@ -18,9 +18,8 @@ import { DEFAULT_COLOR_MODE, getComputed } from './utils';
 
 export const EuiSystemContext = createContext<EuiThemeSystem>(EuiThemeDefault);
 export const EuiModificationsContext = createContext<EuiThemeModifications>({});
-export const EuiColorModeContext = createContext<EuiThemeColorMode>(
-  DEFAULT_COLOR_MODE
-);
+export const EuiColorModeContext =
+  createContext<EuiThemeColorMode>(DEFAULT_COLOR_MODE);
 export const EuiThemeContext = createContext<EuiThemeComputed>(
   getComputed(EuiThemeDefault, {}, DEFAULT_COLOR_MODE)
 );

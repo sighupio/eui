@@ -258,9 +258,8 @@ const DataGrid = () => {
   const [allowOrderingColumns, setAllowOrderingColumns] = useState(true);
   const [showFullScreenSelector, setShowFullScreenSelector] = useState(true);
   const [showToolbar, setShowToolbar] = useState(true);
-  const [toolbarPropTypeIsBoolean, setToolbarPropTypeIsBoolean] = useState(
-    true
-  );
+  const [toolbarPropTypeIsBoolean, setToolbarPropTypeIsBoolean] =
+    useState(true);
   const [pagination, setPagination] = useState({
     pageIndex: 0,
     pageSize: 5,

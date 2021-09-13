@@ -9,11 +9,12 @@
 import * as MarkdownTooltip from '../markdown_tooltip';
 import { EuiMarkdownEditorUiPlugin } from './../../markdown_types';
 
-export const getDefaultEuiMarkdownUiPlugins = (): EuiMarkdownEditorUiPlugin[] => {
-  const array = [MarkdownTooltip.plugin];
-  // @ts-ignore __originatedFromEui is a custom property
-  array.__originatedFromEui = true;
-  return array;
-};
+export const getDefaultEuiMarkdownUiPlugins =
+  (): EuiMarkdownEditorUiPlugin[] => {
+    const array = [MarkdownTooltip.plugin];
+    // @ts-ignore __originatedFromEui is a custom property
+    array.__originatedFromEui = true;
+    return array;
+  };
 
 export const defaultUiPlugins = getDefaultEuiMarkdownUiPlugins();

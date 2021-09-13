@@ -29,38 +29,39 @@ export interface EuiTableSortMobileItemProps extends CommonProps {
   ariaLabel?: string;
 }
 
-export const EuiTableSortMobileItem: FunctionComponent<EuiTableSortMobileItemProps> = ({
-  children,
-  onSort,
-  isSorted,
-  isSortAscending,
-  className,
-  ariaLabel,
-  ...rest
-}) => {
-  let sortIcon = 'empty';
-  if (isSorted) {
-    sortIcon = isSortAscending ? 'sortUp' : 'sortDown';
-  }
+export const EuiTableSortMobileItem: FunctionComponent<EuiTableSortMobileItemProps> =
+  ({
+    children,
+    onSort,
+    isSorted,
+    isSortAscending,
+    className,
+    ariaLabel,
+    ...rest
+  }) => {
+    let sortIcon = 'empty';
+    if (isSorted) {
+      sortIcon = isSortAscending ? 'sortUp' : 'sortDown';
+    }
 
-  const buttonClasses = classNames('euiTableSortMobileItem', className, {
-    'euiTableSortMobileItem-isSorted': isSorted,
-  });
+    const buttonClasses = classNames('euiTableSortMobileItem', className, {
+      'euiTableSortMobileItem-isSorted': isSorted,
+    });
 
-  const columnTitle = ariaLabel ? ariaLabel : children;
-  const statefulAriaLabel = `Sort ${columnTitle} ${
-    isSortAscending ? 'descending' : 'ascending'
-  }`;
+    const columnTitle = ariaLabel ? ariaLabel : children;
+    const statefulAriaLabel = `Sort ${columnTitle} ${
+      isSortAscending ? 'descending' : 'ascending'
+    }`;
 
-  return (
-    <EuiContextMenuItem
-      className={buttonClasses}
-      icon={sortIcon}
-      onClick={onSort}
-      aria-label={statefulAriaLabel}
-      {...rest}
-    >
-      {children}
-    </EuiContextMenuItem>
-  );
-};
+    return (
+      <EuiContextMenuItem
+        className={buttonClasses}
+        icon={sortIcon}
+        onClick={onSort}
+        aria-label={statefulAriaLabel}
+        {...rest}
+      >
+        {children}
+      </EuiContextMenuItem>
+    );
+  };

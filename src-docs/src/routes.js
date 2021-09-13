@@ -248,15 +248,8 @@ const createExample = (example, customTitle) => {
     );
   }
 
-  const {
-    title,
-    intro,
-    sections,
-    beta,
-    isNew,
-    playground,
-    guidelines,
-  } = example;
+  const { title, intro, sections, beta, isNew, playground, guidelines } =
+    example;
   sections.forEach((section) => {
     section.id = section.title ? slugify(section.title) : undefined;
   });

@@ -10,16 +10,15 @@ import React, { TextareaHTMLAttributes, forwardRef } from 'react';
 
 import { CommonProps } from '../common';
 
-export type EuiMarkdownEditorTextAreaProps = TextareaHTMLAttributes<
-  HTMLTextAreaElement
-> &
-  CommonProps & {
-    isInvalid?: boolean;
-    fullWidth?: boolean;
-    compressed?: boolean;
-    height: string;
-    maxHeight: string;
-  };
+export type EuiMarkdownEditorTextAreaProps =
+  TextareaHTMLAttributes<HTMLTextAreaElement> &
+    CommonProps & {
+      isInvalid?: boolean;
+      fullWidth?: boolean;
+      compressed?: boolean;
+      height: string;
+      maxHeight: string;
+    };
 
 export const EuiMarkdownEditorTextArea = forwardRef<
   HTMLTextAreaElement,

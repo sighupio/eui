@@ -213,10 +213,9 @@ function getInitialSorting<T>(
     };
   }
 
-  const {
-    field: sortable,
-    direction: sortDirection,
-  } = (sorting as SortingOptions).sort;
+  const { field: sortable, direction: sortDirection } = (
+    sorting as SortingOptions
+  ).sort;
 
   // sortable could be a column's `field` or its `name`
   // for backwards compatibility `field` must be checked first
@@ -343,12 +342,8 @@ export class EuiInMemoryTable<T> extends Component<
     super(props);
 
     const { columns, search, pagination, sorting, allowNeutralSort } = props;
-    const {
-      pageIndex,
-      pageSize,
-      pageSizeOptions,
-      hidePerPageOptions,
-    } = getInitialPagination(pagination);
+    const { pageIndex, pageSize, pageSizeOptions, hidePerPageOptions } =
+      getInitialPagination(pagination);
     const { sortName, sortDirection } = getInitialSorting(columns, sorting);
 
     this.state = {

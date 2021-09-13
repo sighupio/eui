@@ -385,7 +385,7 @@ export class EuiPopover extends Component<Props, State> {
 
   onKeyDown = (event: KeyboardEvent) => {
     if (event.key === cascadingMenuKeys.ESCAPE) {
-      this.onEscapeKey((event as unknown) as Event);
+      this.onEscapeKey(event as unknown as Event);
     }
   };
 

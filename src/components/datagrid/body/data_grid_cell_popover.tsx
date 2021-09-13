@@ -29,9 +29,8 @@ export function EuiDataGridCellPopover({
   renderCellValue,
   rowIndex,
 }: EuiDataGridCellPopoverProps) {
-  const CellElement = renderCellValue as JSXElementConstructor<
-    EuiDataGridCellValueElementProps
-  >;
+  const CellElement =
+    renderCellValue as JSXElementConstructor<EuiDataGridCellValueElementProps>;
   return (
     <EuiPopover
       hasArrow={false}
@@ -62,9 +61,8 @@ export function EuiDataGridCellPopover({
               <EuiFlexGroup gutterSize="s">
                 {column.cellActions.map(
                   (Action: EuiDataGridColumnCellAction, idx: number) => {
-                    const CellButtonElement = Action as JSXElementConstructor<
-                      EuiDataGridColumnCellActionProps
-                    >;
+                    const CellButtonElement =
+                      Action as JSXElementConstructor<EuiDataGridColumnCellActionProps>;
                     return (
                       <EuiFlexItem key={idx}>
                         <CellButtonElement

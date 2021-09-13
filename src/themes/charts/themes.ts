@@ -207,9 +207,8 @@ function createTheme(colors: any): EuiChartThemeType {
   };
 }
 
-export const EUI_CHARTS_THEME_LIGHT: EuiChartThemeType = createTheme(
-  lightColors
-);
+export const EUI_CHARTS_THEME_LIGHT: EuiChartThemeType =
+  createTheme(lightColors);
 export const EUI_CHARTS_THEME_DARK: EuiChartThemeType = createTheme(darkColors);
 
 export const EUI_SPARKLINE_THEME_PARTIAL: PartialTheme = {

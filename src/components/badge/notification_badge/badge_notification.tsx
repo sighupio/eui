@@ -37,23 +37,18 @@ export interface EuiNotificationBadgeProps
   color?: BadgeNotificationColor;
 }
 
-export const EuiNotificationBadge: FunctionComponent<EuiNotificationBadgeProps> = ({
-  children,
-  className,
-  size = 's',
-  color = 'accent',
-  ...rest
-}) => {
-  const classes = classNames(
-    'euiNotificationBadge',
-    sizeToClassNameMap[size],
-    colorToClassMap[color],
-    className
-  );
+export const EuiNotificationBadge: FunctionComponent<EuiNotificationBadgeProps> =
+  ({ children, className, size = 's', color = 'accent', ...rest }) => {
+    const classes = classNames(
+      'euiNotificationBadge',
+      sizeToClassNameMap[size],
+      colorToClassMap[color],
+      className
+    );
 
-  return (
-    <span className={classes} {...rest}>
-      {children}
-    </span>
-  );
-};
+    return (
+      <span className={classes} {...rest}>
+        {children}
+      </span>
+    );
+  };

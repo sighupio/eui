@@ -37,8 +37,9 @@ type OptionalEuiSelectableOptionsListProps = Omit<
   EuiSelectableOptionsListProps,
   keyof RequiredEuiSelectableOptionsListProps
 >;
-type EuiSelectableOptionsListPropsWithDefaults = RequiredEuiSelectableOptionsListProps &
-  Partial<OptionalEuiSelectableOptionsListProps>;
+type EuiSelectableOptionsListPropsWithDefaults =
+  RequiredEuiSelectableOptionsListProps &
+    Partial<OptionalEuiSelectableOptionsListProps>;
 
 // `searchProps` can only be specified when `searchable` is true
 type EuiSelectableSearchableProps<T> = ExclusiveUnion<

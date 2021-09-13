@@ -13,17 +13,19 @@ import {
   EuiDataGridSorting,
 } from './data_grid_types';
 
-export const DataGridFocusContext = React.createContext<
-  DataGridFocusContextShape
->({
-  setFocusedCell: () => {},
-  onFocusUpdate: () => () => {},
-});
+export const DataGridFocusContext =
+  React.createContext<DataGridFocusContextShape>({
+    setFocusedCell: () => {},
+    onFocusUpdate: () => () => {},
+  });
 
 export const DataGridSortingContext = React.createContext<
   EuiDataGridSorting | undefined
 >(undefined);
 
-export const DataGridWrapperRowsContext = React.createContext<
-  DataGridWrapperRowsContentsShape
->({ headerRow: <div />, headerRowHeight: 0, footerRow: null });
+export const DataGridWrapperRowsContext =
+  React.createContext<DataGridWrapperRowsContentsShape>({
+    headerRow: <div />,
+    headerRowHeight: 0,
+    footerRow: null,
+  });

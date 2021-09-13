@@ -25,7 +25,7 @@ describe('EuiDataGridCellPopover', () => {
       isDetails: false,
     },
     anchorContent: <button />,
-    cellContentsRef: ((<div />) as unknown) as HTMLDivElement,
+    cellContentsRef: (<div />) as unknown as HTMLDivElement,
     panelRefFn: () => <div />,
     renderCellValue: () => <div />,
     popoverContent: () => <div />,
