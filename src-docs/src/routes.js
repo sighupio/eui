@@ -314,7 +314,7 @@ const createMarkdownExample = (example, title) => {
     name: title,
     component: () => (
       <GuidePage title={title}>
-        <GuideMarkdownFormat title={title} grow={false}>
+        <GuideMarkdownFormat grow={false}>
           {example.default}
         </GuideMarkdownFormat>
       </GuidePage>
@@ -333,10 +333,7 @@ const navigation = [
         name: 'Colors',
         component: ColorGuidelines,
       },
-      {
-        name: 'Sass',
-        component: SassGuidelines,
-      },
+      createExample(SassGuidelines, 'Sass'),
       createExample(WritingGuidelines, 'Writing'),
     ],
   },
