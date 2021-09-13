@@ -24,7 +24,7 @@ import WritingGuidelines from './views/guidelines/writing';
 
 import { ColorPaletteExample } from './views/color_palette/color_palette_example';
 
-import { IsColorDarkExample } from './views/is_color_dark/is_color_dark_example';
+import { ColorExample } from './views/color/color_example';
 
 import { PrettyDurationExample } from './views/pretty_duration/pretty_duration_example';
 
@@ -65,6 +65,8 @@ import { ColorPickerExample } from './views/color_picker/color_picker_example';
 import { ComboBoxExample } from './views/combo_box/combo_box_example';
 
 import { CommentListExample } from './views/comment/comment_example';
+
+import { ConnectionExample } from './views/connection/connection_example';
 
 import { ContextMenuExample } from './views/context_menu/context_menu_example';
 
@@ -222,6 +224,9 @@ import { I18nTokens } from './views/package/i18n_tokens';
 
 import { SuperSelectExample } from './views/super_select/super_select_example';
 
+import { ThemeExample } from './views/theme/theme_example';
+import ThemeValues from './views/theme/values';
+
 /** Elastic Charts */
 
 import { ElasticChartsThemingExample } from './views/elastic_charts/theming_example';
@@ -280,7 +285,8 @@ const createExample = (example, customTitle) => {
         intro={intro}
         isBeta={beta}
         playground={playgroundComponent}
-        guidelines={guidelines}>
+        guidelines={guidelines}
+      >
         {renderedSections}
       </GuidePage>
     </EuiErrorBoundary>
@@ -308,7 +314,7 @@ const createMarkdownExample = (example, title) => {
     name: title,
     component: () => (
       <GuidePage title={title}>
-        <GuideMarkdownFormat title={title} grow={false}>
+        <GuideMarkdownFormat grow={false}>
           {example.default}
         </GuideMarkdownFormat>
       </GuidePage>
@@ -327,10 +333,7 @@ const navigation = [
         name: 'Colors',
         component: ColorGuidelines,
       },
-      {
-        name: 'Sass',
-        component: SassGuidelines,
-      },
+      createExample(SassGuidelines, 'Sass'),
       createExample(WritingGuidelines, 'Writing'),
     ],
   },
@@ -364,10 +367,10 @@ const navigation = [
       KeyPadMenuExample,
       LinkExample,
       PaginationExample,
-      TreeViewExample,
       SideNavExample,
       StepsExample,
       TabsExample,
+      TreeViewExample,
     ].map((example) => createExample(example)),
   },
   {
@@ -395,6 +398,7 @@ const navigation = [
       CallOutExample,
       CardExample,
       CommentListExample,
+      ConnectionExample,
       DescriptionListExample,
       DragAndDropExample,
       EmptyPromptExample,
@@ -459,7 +463,7 @@ const navigation = [
     items: [
       AccessibilityExample,
       BeaconExample,
-      IsColorDarkExample,
+      ColorExample,
       ColorPaletteExample,
       CopyExample,
       UtilityClassesExample,
@@ -480,6 +484,17 @@ const navigation = [
       TextDiffExample,
       WindowEventExample,
     ].map((example) => createExample(example)),
+  },
+  {
+    name: 'Theming',
+    items: [
+      createExample(ThemeExample, 'Theme provider'),
+      {
+        name: 'Global values',
+        component: ThemeValues,
+        isNew: true,
+      },
+    ],
   },
   {
     name: 'Package',

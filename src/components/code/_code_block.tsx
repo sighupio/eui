@@ -246,7 +246,8 @@ export const EuiCodeBlockImpl: FunctionComponent<EuiCodeBlockImplProps> = ({
     {
       'euiCodeBlock--transparentBackground': transparentBackground,
       'euiCodeBlock--inline': inline,
-      'euiCodeBlock--hasControls': isCopyable || overflowHeight,
+      'euiCodeBlock--hasControl': isCopyable || overflowHeight,
+      'euiCodeBlock--hasBothControls': isCopyable && overflowHeight,
     },
     {
       prismjs: !className?.includes('prismjs'),
@@ -300,7 +301,7 @@ export const EuiCodeBlockImpl: FunctionComponent<EuiCodeBlockImplProps> = ({
                 {(copy) => (
                   <EuiButtonIcon
                     onClick={copy}
-                    iconType="copy"
+                    iconType="copyClipboard"
                     color="text"
                     aria-label={copyButton}
                   />
@@ -324,7 +325,8 @@ export const EuiCodeBlockImpl: FunctionComponent<EuiCodeBlockImplProps> = ({
           'euiCodeBlock.fullscreenCollapse',
           'euiCodeBlock.fullscreenExpand',
         ]}
-        defaults={['Collapse', 'Expand']}>
+        defaults={['Collapse', 'Expand']}
+      >
         {([fullscreenCollapse, fullscreenExpand]: string[]) => (
           <EuiButtonIcon
             className="euiCodeBlock__fullScreenButton"
@@ -386,7 +388,8 @@ export const EuiCodeBlockImpl: FunctionComponent<EuiCodeBlockImplProps> = ({
                       innerElementType={virtualizedInnerElement({
                         className: preClasses,
                         onKeyDown,
-                      })}>
+                      })}
+                    >
                       {ListRow}
                     </FixedSizeList>
                   )}
@@ -427,7 +430,8 @@ export const EuiCodeBlockImpl: FunctionComponent<EuiCodeBlockImplProps> = ({
               innerElementType={virtualizedInnerElement({
                 className: preClasses,
                 onKeyDown,
-              })}>
+              })}
+            >
               {ListRow}
             </FixedSizeList>
           )}
@@ -437,7 +441,8 @@ export const EuiCodeBlockImpl: FunctionComponent<EuiCodeBlockImplProps> = ({
           ref={combinedRef}
           style={optionalStyles}
           className={preClasses}
-          tabIndex={tabIndex}>
+          tabIndex={tabIndex}
+        >
           {codeSnippet}
         </pre>
       )}
