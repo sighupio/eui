@@ -276,10 +276,9 @@ function useInMemoryValues(
   const _inMemoryValues = useRef<EuiDataGridInMemoryValues>({});
   const [inMemoryValuesVersion, setInMemoryValuesVersion] = useState(0);
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   const inMemoryValues = useMemo(
     () => ({ ..._inMemoryValues.current }),
-    [inMemoryValuesVersion]
+    [inMemoryValuesVersion] // eslint-disable-line react-hooks/exhaustive-deps
   );
 
   const onCellRender = useCallback((rowIndex, columnId, value) => {
