@@ -40,6 +40,8 @@ export * from './combo_box';
 
 export * from './comment_list';
 
+export * from './connection';
+
 export * from './context';
 
 export * from './context_menu';
