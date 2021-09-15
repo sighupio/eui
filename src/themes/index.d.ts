@@ -6,7 +6,7 @@
  * Side Public License, v 1.
  */
 
-declare module '@elastic/eui/dist/eui_theme_*.json' {
+declare module 'fury-design-system/dist/eui_theme_*.json' {
   const value: any;
   export default value;
 }
