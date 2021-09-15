@@ -148,6 +148,7 @@ export type EuiCodeBlockImplProps = CommonProps & {
    */
   whiteSpace?: 'pre' | 'pre-wrap';
 
+  ref?: any;
   /**
    * Displays line numbers.
    * Optionally accepts a configuration object for setting the starting number:
